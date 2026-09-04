@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title description">
+  <title id="title">Engineering Portfolio social preview</title>
+  <desc id="description">A restrained dark title card with connected system blocks representing domain, data, delivery, and verification.</desc>
+  <rect width="1280" height="640" fill="#0D1117"/>
+  <g fill="none" stroke="#58A6FF" stroke-width="5">
+    <rect x="850" y="150" width="250" height="90" rx="12"/>
+    <rect x="920" y="290" width="250" height="90" rx="12"/>
+    <rect x="780" y="430" width="250" height="90" rx="12"/>
+    <path d="M975 240v50M995 380l-55 50M875 240l-30 190"/>
+  </g>
+  <g fill="#F0F6FC" font-family="Arial, Helvetica, sans-serif">
+    <text x="96" y="128" font-size="28" font-weight="700" letter-spacing="2">ENGINEERING CASE STUDIES</text>
+    <text x="96" y="250" font-size="68" font-weight="700">Engineering Portfolio</text>
+    <text x="96" y="315" font-size="31" fill="#B1BAC4">Domain systems, data trust, delivery, and verification</text>
+    <text x="96" y="548" font-size="25" fill="#B1BAC4">github.com/wouthh/engineering-portfolio</text>
+  </g>
+  <g fill="#F0F6FC" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" text-anchor="middle">
+    <text x="975" y="205">DOMAIN</text>
+    <text x="1045" y="345">DELIVERY</text>
+    <text x="905" y="485">EVIDENCE</text>
+  </g>
+</svg>
