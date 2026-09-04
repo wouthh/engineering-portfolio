@@ -22,7 +22,7 @@ The original application combined commands, scheduled tasks, persistence, integr
 
 The platform also has real operational constraints:
 
-- Scheduled jobs must recover after restarts without publishing twice.
+- Scheduled jobs must recover after restarts without blindly duplicating a known external outcome.
 - External writes must stop when authority or destination configuration is missing.
 - The web interface may expose projections but must not bypass established domain procedures.
 - Contracts shared between processes need compatibility discipline.
@@ -90,12 +90,15 @@ The trade-off is deliberate friction during reactivation. Re-enabling work requi
 |---|---|
 | API and service implement the same rule differently | Both invoke one domain procedure |
 | A frontend treats a projection as writable truth | Explicit read-model contract and server-owned write boundary |
-| A restart publishes scheduled work twice | Durable claim/reservation and idempotent completion |
+| Two workers claim the same scheduled item | Durable claim/reservation and idempotent local completion |
+| A worker crashes after external publication | Stable downstream idempotency key when supported; otherwise record an unknown outcome and reconcile before retrying |
 | Missing configuration defaults to external mutation | Fail-closed configuration parsing and execution-time guard |
 | A shared package becomes tightly coupled to one process | Dependency rules and narrow exported contracts |
 | Migrations execute in an ambiguous order | Timestamped, append-only migration chain with validation |
 | Generated output is edited instead of its source | Canonical-source marker and regeneration check |
 | One large validation command becomes opaque | Composed focused checks with a documented aggregate gate |
+
+A durable claim prevents concurrent workers from owning the same item, but it cannot create exactly-once behavior across an external boundary. That requires the receiver or broker to honor a stable delivery identity. Without such a contract, a crash after publication but before local completion produces an unknown outcome; recovery must reconcile that outcome rather than automatically publish again.
 
 ## Testing and verification
 
