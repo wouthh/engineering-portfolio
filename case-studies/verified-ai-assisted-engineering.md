@@ -14,7 +14,7 @@ AI can accelerate source discovery, implementation, test design, documentation, 
 
 My workflow treats an AI coding agent as a capable collaborator operating inside an explicit contract. The contract defines the repository, allowed mutations, protected data, acceptance criteria, validation commands, external-action boundaries, and stop conditions. The agent gathers evidence, implements narrowly, and reports limitations. It does not expand authority because a nearby improvement looks convenient.
 
-This case study explains that workflow. A separate public playbook provides reusable templates and tested utilities.
+This case study explains that workflow. The public [AI-Assisted Engineering Playbook](https://github.com/wouthh/ai-assisted-engineering-playbook) provides reusable templates and tested utilities.
 
 ## Context and constraints
 
