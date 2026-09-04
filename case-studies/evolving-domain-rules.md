@@ -26,7 +26,7 @@ Several constraints shape safe change:
 - A shared rule may have configuration-specific overrides.
 - Events can produce more than one side effect, each with different retry behavior.
 - Old and new application versions may briefly coexist during rollout.
-- A retry must not turn a once-only business event into a duplicate action.
+- A retry must not silently turn one business intent into duplicate external effects.
 - Tests need to cover the shared mechanism and the meaningful variations without duplicating the entire suite.
 
 The practical consequence is that correctness spans code, configuration, persisted state, and deployment order.
@@ -49,6 +49,8 @@ flowchart LR
 ```
 
 The important boundary is between deciding and delivering. A domain transition should be committed with enough durable intent to resume its side effects. The external call should not be the authority for whether the transition occurred, and an in-memory queue should not be the only record that work remains.
+
+Access has a similarly explicit boundary. In the source system, OAuth 2.0 and OpenID Connect integrate with Keycloak-issued JWTs for identity, while application authorization applies role-based access control at route and use-case boundaries. Tests distinguish authentication failure from an authenticated caller lacking permission; possession of a valid token is not treated as blanket authority.
 
 ## Decisions and trade-offs
 
@@ -79,9 +81,9 @@ Tests should prove not only that each rule can match, but also that competing ru
 
 ### Persist idempotency at the business boundary
 
-Retries are normal. Duplicate business outcomes are not. For once-only delivery, I use a stable business key and a database uniqueness constraint, then enqueue only the transaction that successfully reserved that key.
+Retries are normal. Duplicate business outcomes are not. A stable business key and database uniqueness constraint prevent duplicate internal intent, and only the transaction that successfully reserves that key is enqueued.
 
-This is stronger than “check, then insert,” which can race. It also gives operators a durable record to inspect and retry. Repeated events remain possible when repetition is part of the contract, but that choice is explicit.
+This is stronger than “check, then insert,” which can race. Delivery is still at least once across the external-call boundary unless the receiver honors the same idempotency key or provides an equivalent deduplication contract. Without that downstream guarantee, a crash after a successful call but before local acknowledgement produces an unknown outcome that must be reconciled rather than retried blindly.
 
 ## Failure modes and safeguards
 
@@ -89,7 +91,8 @@ This is stronger than “check, then insert,” which can race. It also gives op
 |---|---|
 | A narrow rule edit changes an unrelated route | Characterization tests plus a matrix of affected and unaffected paths |
 | Configuration-specific behavior replaces shared behavior accidentally | Explicit base-to-override resolution and tests for both paths |
-| Two workers publish the same once-only effect | Durable business key and database-enforced uniqueness |
+| Two workers create the same delivery intent | Durable business key and database-enforced uniqueness |
+| A worker crashes after an external success | Downstream idempotency when available; otherwise record an unknown outcome and reconcile before retrying |
 | A deployment mixes incompatible writers | Migration-first or drain-migrate-deploy ordering, documented before rollout |
 | A callback fails after domain state commits | Persisted delivery intent with bounded retry and observable status |
 | Old records lack a newly required field | Additive migration, defensive read compatibility, and explicit backfill rules |

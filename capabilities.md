@@ -15,4 +15,4 @@ This map keeps the profile concise while showing where individual technologies f
 | Delivery and operations | Docker, CI/CD, Kubernetes, OpenShift, Helm, Railway, Cloudflare | [Verified AI-Assisted Engineering](case-studies/verified-ai-assisted-engineering.md) |
 | Verification and recovery | Unit and integration tests, static analysis, migrations, rollback, smoke testing, production diagnosis | [Verified AI-Assisted Engineering](case-studies/verified-ai-assisted-engineering.md) |
 
-The table describes experience, not a promise that every case study uses every listed technology. The linked pages explain the relevant boundary and evidence.
+The table describes experience, not a promise that every case study uses every listed technology. Each linked page identifies the relevant boundary, evidence basis, and limitations.

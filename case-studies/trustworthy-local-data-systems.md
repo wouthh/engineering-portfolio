@@ -49,7 +49,7 @@ flowchart LR
     R --> X[Rebuildable index]
     R --> P[Projection and browser]
     R --> E[Source-faithful export]
-    X -. rebuild .-> R
+    R -. rebuild .-> X
 ```
 
 The canonical layer stores what was observed, where it came from, and how confidently records can be related. The index is an acceleration structure. The browser is a view. The export is a declared interpretation. None silently replaces the canonical record.
