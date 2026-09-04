@@ -14,7 +14,7 @@ In a long-lived backend, a small rule change rarely stays small. A new condition
 
 The approach I use starts by making rule ownership, ordering, and side effects visible. I separate pure decisions from persistence and delivery, characterize existing behavior with focused tests, migrate data additively, and define rollout and rollback before deployment. This has proved more reliable than treating each request as an isolated controller edit.
 
-The source system behind this case study uses PHP, Symfony, Doctrine, PostgreSQL, asynchronous processing, API integrations, and a configurable business-rule layer. Names and examples below are synthetic.
+The source system behind this case study uses PHP, Symfony, Doctrine, PostgreSQL, HTTP APIs, Symfony Messenger, webhook integrations, and a configurable business-rule layer. Names and examples below are synthetic.
 
 ## Context and constraints
 

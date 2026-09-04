@@ -5,7 +5,7 @@ This map keeps the profile concise while showing where individual technologies f
 | Capability | Technologies used naturally | Evidence in this portfolio |
 |---|---|---|
 | Domain backends and evolving business rules | PHP, Symfony, Doctrine, PostgreSQL, rules engines | [Evolving Domain Rules](case-studies/evolving-domain-rules.md) |
-| APIs and asynchronous processing | REST, Symfony Messenger, Node.js, Fastify, queues, webhooks | [Evolving Domain Rules](case-studies/evolving-domain-rules.md), [Modular TypeScript Platform](case-studies/modular-typescript-platform.md) |
+| APIs and asynchronous processing | HTTP APIs, Symfony Messenger, Node.js, Fastify, queues, webhooks | [Evolving Domain Rules](case-studies/evolving-domain-rules.md), [Modular TypeScript Platform](case-studies/modular-typescript-platform.md) |
 | Authentication and authorization | OAuth 2.0, OpenID Connect, Keycloak, JWT, RBAC | [Evolving Domain Rules](case-studies/evolving-domain-rules.md) |
 | Modular full-stack systems | TypeScript, Node.js, Fastify, Nuxt, Vue, React, Electron | [Modular TypeScript Platform](case-studies/modular-typescript-platform.md), [Trading-System Evolution](notes/trading-system-evolution.md) |
 | Local-first applications and data trust | Python, PySide6, TypeScript, SQLite, append-only records | [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) |
@@ -19,4 +19,4 @@ Each linked page identifies the relevant boundary, evidence basis, and limitatio
 
 ## Broader stack experience
 
-The following self-reported experience is intentionally not presented as evidence from a specific public case study: Kotlin, Spring Boot, Spring Batch, SQL Server, MySQL/MariaDB, Docker, Kubernetes, OpenShift, Helm, Railway, and Cloudflare. It belongs here rather than on the profile's first screen so the distinction between demonstrated case-study evidence and broader experience remains clear.
+The following self-reported experience is intentionally not presented as evidence from a specific public case study: REST API design, Kotlin, Spring Boot, Spring Batch, SQL Server, MySQL/MariaDB, Docker, Kubernetes, OpenShift, Helm, Railway, and Cloudflare. It belongs here rather than on the profile's first screen so the distinction between demonstrated case-study evidence and broader experience remains clear.
