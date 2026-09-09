@@ -14,6 +14,16 @@ The case studies cover PHP/Symfony domain systems, TypeScript platform boundarie
 
 These case studies describe real engineering work using sanitized architecture, synthetic examples, and original diagrams. They omit proprietary code, operational data, and identifying organization details.
 
+## Inspectable public implementation
+
+[Equipment Service Desk](https://github.com/wouthh/equipment-service-desk) is an original synthetic PHP/Symfony backend for equipment requests, policy-based triage, technician assignment, and asynchronous reporting. It provides public code to inspect alongside the architectural case studies:
+
+- [Domain rules](https://github.com/wouthh/equipment-service-desk/blob/main/docs/domain.md) and [architecture](https://github.com/wouthh/equipment-service-desk/blob/main/docs/architecture.md) explain the boundaries and decisions.
+- [Implementation](https://github.com/wouthh/equipment-service-desk/tree/main/src) and [synthetic tests](https://github.com/wouthh/equipment-service-desk/tree/main/tests) make those decisions inspectable.
+- [Validation guide](https://github.com/wouthh/equipment-service-desk/blob/main/docs/testing.md) and [deliberate limits](https://github.com/wouthh/equipment-service-desk#deliberate-limits) describe how to check it and what it leaves out.
+
+This is a local reference implementation, with no production deployment, real-user, or measured-scale claim. It is a separate public example; the anonymised case studies below do not disclose their underlying source.
+
 ## Flagship case studies
 
 | Case study | Focus |
