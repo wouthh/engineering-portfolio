@@ -17,6 +17,8 @@ This map keeps the profile concise while showing where individual technologies f
 
 Each linked page identifies the relevant boundary, evidence basis, and limitations.
 
+For inspectable PHP/Symfony code, see [Equipment Service Desk](README.md#inspectable-public-implementation), a synthetic reference implementation with documented tests and limits.
+
 ## Broader stack experience
 
 The following self-reported experience is intentionally not presented as evidence from a specific public case study: REST API design, Kotlin, Spring Boot, Spring Batch, ETL, CSV processing, reporting, SQL Server, MySQL/MariaDB, Docker, Kubernetes, OpenShift, Helm, Railway, and Cloudflare. It belongs here rather than on the profile's first screen so the distinction between demonstrated case-study evidence and broader experience remains clear.
