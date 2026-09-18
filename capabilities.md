@@ -17,7 +17,7 @@ This map keeps the profile concise while showing where individual technologies f
 
 Each linked page identifies the relevant boundary, evidence basis, and limitations.
 
-For inspectable PHP/Symfony code, see [Equipment Service Desk](README.md#inspectable-public-implementation), a synthetic reference implementation with documented tests and limits.
+For inspectable PHP/Symfony code, see [Equipment Service Desk](README.md#inspectable-public-implementations), a synthetic reference implementation with documented tests and limits.
 
 ## Broader stack experience
 

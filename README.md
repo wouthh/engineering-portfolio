@@ -14,7 +14,7 @@ The case studies cover PHP/Symfony domain systems, TypeScript platform boundarie
 
 These case studies describe real engineering work using sanitized architecture, synthetic examples, and original diagrams. They omit proprietary code, operational data, and identifying organization details.
 
-## Inspectable public implementation
+## Inspectable public implementations
 
 [Equipment Service Desk](https://github.com/wouthh/equipment-service-desk) is an original synthetic PHP/Symfony backend for equipment requests, policy-based triage, technician assignment, and asynchronous reporting. It provides public code to inspect alongside the architectural case studies:
 
@@ -23,6 +23,8 @@ These case studies describe real engineering work using sanitized architecture, 
 - [Validation guide](https://github.com/wouthh/equipment-service-desk/blob/main/docs/testing.md) and [deliberate limits](https://github.com/wouthh/equipment-service-desk#deliberate-limits) describe how to check it and what it leaves out.
 
 This is a local reference implementation, with no production deployment, real-user, or measured-scale claim. It is a separate public example; the anonymised case studies below do not disclose their underlying source.
+
+[Hardcore Radio Logger](https://github.com/wouthh/hardcore-radio-logger) is a current public Python and SQLite project for local-first radio discovery and library reconciliation. Its README documents provenance, dry-run planning, and guarded synchronization; provider use is optional and authorization-dependent. It is a separate public codebase and does not disclose the private sources behind the case studies below.
 
 ## Flagship case studies
 
