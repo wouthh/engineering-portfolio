@@ -24,7 +24,7 @@ The lead case study describes my documented PHP/Symfony and API Platform work in
 
 Each page identifies whether a statement is supported by documented professional experience, inspectable public project material, or generalized guidance. See the [capabilities map](capabilities.md) for the relationship between supported scope and the case studies. Source code can support a claim about what a project contains; by itself, it does not establish who personally designed, reviewed, or tested it. Automated tests and agent review are not described as human inspection. Tests documented by a repository are not represented as having run during this update.
 
-Private-source summaries remain limited to approved, non-identifying professional scope. The public portfolio contains no employer or client names, private repository URLs, operational data, or proprietary implementation material.
+Private-source summaries, whether professional or personal, remain limited to approved, non-identifying scope. An independent reader may not be able to authenticate them from this portfolio. The public portfolio contains no employer or client names, private repository URLs, operational data, or proprietary implementation material.
 
 ## Experimental example
 

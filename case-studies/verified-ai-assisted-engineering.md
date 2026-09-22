@@ -4,6 +4,7 @@ A practical distinction between human-set goals, agent implementation, automated
 
 - Scope: Recommended engineering process and bounded examples
 - Publication status: Guidance, not an audit of every repository or past change
+- Current status: Maintained guidance; not a retrospective audit of historical changes
 
 ## Summary
 

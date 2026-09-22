@@ -5,6 +5,7 @@ A bounded account of PHP/Symfony backend responsibilities in a configurable clai
 - Context: Professional PHP/Symfony backend work; organization and chronology intentionally omitted
 - Contribution basis: Documented professional responsibilities, summarized without employer identifiers
 - Publication status: Sanitized case-study account; private source details are not reproduced
+- Current status: Case-study documentation maintained; no current platform operation or deployment status is asserted
 
 ## Professional context
 

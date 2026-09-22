@@ -1,12 +1,12 @@
 # Trustworthy Local Data Systems
 
-Designing provenance, append-only evidence, uncertainty, deterministic reconstruction, migrations, indexing, and rollback into local-first tools.
+General design guidance for provenance, uncertainty, reconstruction, migrations, indexing, and rollback in local-first tools.
 
 - Development period: Not precisely documented in this public case study
 - GitHub publication: Underlying source is not public
 - Context: Personal local-first applications; architecture and examples are sanitized
-- Current status: Active implementations; public case-study documentation maintained
-- Last verification: 2026-09
+- Current status: Public guidance maintained; private project status is not independently verifiable here
+- Last page review: 2026-09
 
 ## Evidence scope
 
@@ -16,15 +16,15 @@ My approved CV supports local-data project work and records SQLite schema, migra
 
 Local-first software can offer strong privacy and resilience, but “stored on this computer” is not enough to make its conclusions trustworthy. A useful local data system must show where a record came from, distinguish retained evidence from derived interpretation, survive schema evolution, and make uncertainty visible rather than silently filling gaps.
 
-This case study combines lessons from CacheTyrant and TyrantLedger. Both work with locally retained application artifacts, but at different layers. One focuses on bounded import, normalization, reconstruction, browsing, and export. The other focuses on durable capture, append-only journaling, derived indexes, and guarded projections. Neither underlying source repository is public, and no real content or user identity is reproduced here.
+The case study draws on personal local-data project experience, but the underlying source repositories are not public. The approved professional summary supports the limited SQLite responsibilities stated above, not the implementation details of those projects. Technical mechanisms, diagrams, and scenarios below are generalized guidance rather than a verified feature list.
 
-The shared design principle is simple: authoritative evidence is preserved with provenance; projections are rebuildable; exports state what they can and cannot prove.
+One useful design principle is to preserve evidence with provenance, keep derived projections rebuildable, and state what an export can and cannot establish.
 
 ## Context and constraints
 
 Local application data is often partial. Files may rotate, caches may omit older records, timestamps may represent observation rather than creation, and two sources may contain overlapping representations of one event. Treating every row as equally authoritative creates false certainty.
 
-The systems therefore need to handle:
+A general design checklist for local-data systems includes:
 
 - multiple local source formats and schema versions;
 - large inputs without unbounded reads;
@@ -36,11 +36,11 @@ The systems therefore need to handle:
 - exports that must be source-faithful without overstating completeness;
 - privacy boundaries that exclude unrelated local data.
 
-The software must also remain useful offline. Network lookup cannot be the hidden requirement for understanding or verifying a local record.
+Local-first designs should remain useful offline; network lookup should not be a hidden requirement for understanding or verifying a local record.
 
 ## System boundary
 
-Diagram summary: immutable or append-only observations enter through bounded adapters, canonical records retain provenance, and rebuildable indexes and exports are derived from that authority.
+Illustrative diagram summary: bounded observations enter through adapters, canonical records retain provenance, and rebuildable indexes and exports derive from that authority.
 
 ```mermaid
 flowchart LR
@@ -56,7 +56,7 @@ flowchart LR
     R -. rebuild .-> X
 ```
 
-The canonical layer stores what was observed, where it came from, and how confidently records can be related. The index is an acceleration structure. The browser is a view. The export is a declared interpretation. None silently replaces the canonical record.
+In a design following this model, the canonical layer stores observations, provenance, and uncertainty; indexes accelerate lookup, browsers present views, and exports state their interpretation. None silently replaces the canonical record.
 
 ## Decisions and trade-offs
 
@@ -112,7 +112,7 @@ Forward compatibility is not assumed. A future unsupported schema should fail wi
 
 ## Testing and verification
 
-Real local content is unnecessary for most verification. The test strategy uses synthetic fixtures designed to cover structure and failure modes:
+Real local content is unnecessary for most verification. A representative test plan can use synthetic fixtures to cover structure and failure modes:
 
 - minimal valid inputs for each supported version;
 - duplicates and conflicting observations;
@@ -129,7 +129,7 @@ Packaging validation is kept distinct from application semantics. A source packa
 
 ## Outcome and lessons
 
-The result is a system whose conclusions can be challenged. A user or maintainer can ask where a record came from, which parser interpreted it, which projection displayed it, and what information was unavailable. Recovery has a defined source of truth instead of relying on whichever database file still opens.
+A system built with these boundaries makes its conclusions easier to challenge: a user or maintainer can ask where a record came from, which parser interpreted it, which projection displayed it, and what information was unavailable. Recovery has a defined source of truth instead of relying on whichever database file still opens.
 
 The strongest lesson is to model evidence quality before building a polished browser. Provenance and uncertainty added later are usually incomplete because the original import already discarded context.
 
