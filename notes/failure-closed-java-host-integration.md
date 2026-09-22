@@ -10,7 +10,7 @@ Lifecycle ownership, readiness gates, bounded recovery, packaging, and verificat
 
 ## Contribution and evidence scope
 
-My documented professional experience includes contributions to a Java/Swing desktop extension, related interfaces, and tests. The linked public repository and this note describe project behaviour; neither is treated here as proof that I personally designed or reviewed every implementation detail. Fixture or packaging checks documented by the project are distinct from a live-host acceptance test.
+My documented professional experience includes contributions to a Java/Swing desktop extension, related interfaces, and tests. This anonymized note summarizes that scope; the underlying source is not public, so readers cannot independently authenticate the implementation details from it. The note does not claim that I personally designed or reviewed every detail. Fixture or packaging checks are distinct from a live-host acceptance test.
 
 ## Summary
 

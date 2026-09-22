@@ -17,12 +17,12 @@ The lead case study describes my documented PHP/Symfony and API Platform work in
 
 ## Supporting engineering notes
 
-- [Failure-Closed Java Host Integration](notes/failure-closed-java-host-integration.md) describes a public Java extension and labels fixture checks separately from live-host acceptance.
+- [Failure-Closed Java Host Integration](notes/failure-closed-java-host-integration.md) is an anonymized account of documented Java/Swing contribution scope; the underlying source is not public, and fixture checks are distinct from live-host acceptance.
 - [Trading-System and Automation Evolution](notes/trading-system-evolution.md) discusses historical public repositories without inferring personal authorship from account or commit metadata.
 
 ## How to read the evidence
 
-Each page identifies whether a statement is supported by documented professional experience, inspectable public project material, or generalized guidance. Source code can support a claim about what a project contains; by itself, it does not establish who personally designed, reviewed, or tested it. Automated tests and agent review are not described as human inspection. Tests documented by a repository are not represented as having run during this update.
+Each page identifies whether a statement is supported by documented professional experience, inspectable public project material, or generalized guidance. See the [capabilities map](capabilities.md) for the relationship between supported scope and the case studies. Source code can support a claim about what a project contains; by itself, it does not establish who personally designed, reviewed, or tested it. Automated tests and agent review are not described as human inspection. Tests documented by a repository are not represented as having run during this update.
 
 Private-source summaries remain limited to approved, non-identifying professional scope. The public portfolio contains no employer or client names, private repository URLs, operational data, or proprietary implementation material.
 

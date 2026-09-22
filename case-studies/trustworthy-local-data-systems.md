@@ -137,6 +137,6 @@ Another lesson is that privacy and testability reinforce each other. Synthetic f
 
 ## Evidence basis and limitations
 
-The described practices were verified against two local-first projects with provenance-aware imports, append-only records, embedded migrations, synthetic fixtures, rebuildable views, guarded exports, and repository-level privacy checks. The importer uses Python, PySide6, and SQLite; the journal uses TypeScript and SQLite. This page contains no real records, identities, messages, source paths, screenshots, or investigative output.
+The diagrams, mechanisms, and failure scenarios on this page are generalized design guidance, not a verified feature list for a named or linked project. They use synthetic examples and do not expose records, identities, messages, source paths, screenshots, or investigative output. The documented professional scope is limited to the SQLite schema, migration, indexing, and testing responsibilities identified above; readers cannot authenticate the private source summary from this page.
 
 Completeness remains source-dependent. Local-first design can preserve and explain available evidence; it cannot manufacture records that were never retained. The case study makes no claim that an export is a complete history beyond its declared inputs.
