@@ -8,6 +8,10 @@ Designing provenance, append-only evidence, uncertainty, deterministic reconstru
 - Current status: Active implementations; public case-study documentation maintained
 - Last verification: 2026-09
 
+## Evidence scope
+
+My approved CV supports local-data project work and records SQLite schema, migration, indexing, and test responsibilities. It does not independently establish every provenance, append-only journal, deletion, recovery, or export guarantee in the previous draft. Treat the detailed mechanisms, diagrams, and failure scenarios below as generalized illustrative design guidance, not a source-verified feature list or a claim that I personally designed or reviewed each mechanism.
+
 ## Summary
 
 Local-first software can offer strong privacy and resilience, but “stored on this computer” is not enough to make its conclusions trustworthy. A useful local data system must show where a record came from, distinguish retained evidence from derived interpretation, survive schema evolution, and make uncertainty visible rather than silently filling gaps.

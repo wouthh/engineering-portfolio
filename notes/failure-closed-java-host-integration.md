@@ -8,6 +8,10 @@ Lifecycle ownership, readiness gates, bounded recovery, packaging, and verificat
 - Current status: Active implementation; public note maintained
 - Last verification: 2026-09
 
+## Contribution and evidence scope
+
+My documented professional experience includes contributions to a Java/Swing desktop extension, related interfaces, and tests. The linked public repository and this note describe project behaviour; neither is treated here as proof that I personally designed or reviewed every implementation detail. Fixture or packaging checks documented by the project are distinct from a live-host acceptance test.
+
 ## Summary
 
 A plugin running beside a third-party desktop host inherits state it does not control: connection lifecycle, runtime arguments, room or document context, protocol compatibility, and host shutdown. Sending an operation merely because a UI button was pressed is unsafe when any of that context is unknown.

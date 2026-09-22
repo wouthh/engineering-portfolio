@@ -8,6 +8,10 @@ Separating domain logic, API contracts, web concerns, persistence, and operation
 - Current status: Active implementation; public case-study documentation maintained
 - Last verification: 2026-09
 
+## Evidence scope
+
+My approved CV supports work designing and maintaining a TypeScript monorepo with a bot, Fastify API, Nuxt/Vue interface, PostgreSQL and Redis, and automated tests. That private summary does not independently substantiate every system boundary or implementation decision described below. The architecture, diagrams, detailed decisions, and failure scenarios in this page are generalized design guidance unless a statement is explicitly tied to that documented contribution. They should not be read as a record that I personally designed or reviewed each detail.
+
 ## Summary
 
 A useful TypeScript application can grow from one process into a platform without becoming a collection of competing implementations. The key is to decide which component owns each kind of truth, then make dependencies cross explicit contracts instead of reaching through directory or process boundaries.

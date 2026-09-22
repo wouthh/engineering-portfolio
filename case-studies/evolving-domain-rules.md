@@ -1,128 +1,44 @@
-# Evolving Domain Rules in a Long-Lived Backend
+# Evolving Domain Rules in a Professional Backend
 
-Safely changing intertwined business rules through explicit boundaries, focused tests, migrations, staged delivery, rollback, and production diagnosis.
+A bounded account of PHP/Symfony backend responsibilities in a configurable claims platform, with generalized guidance clearly separated from the supported professional scope.
 
-- Development period: Multi-year professional context; exact chronology intentionally generalized
-- GitHub publication: Case study first published in 2026
-- Context: Long-lived professional backend platform; organization and chronology intentionally generalized.
-- Current status: Case-study documentation maintained
-- Last verification: 2026-09
+- Context: Professional PHP/Symfony backend work; organization and chronology intentionally omitted
+- Contribution basis: Documented professional responsibilities, summarized without employer identifiers
+- Publication status: Sanitized case-study account; private source details are not reproduced
 
-## Summary
+## Professional context
 
-In a long-lived backend, a small rule change rarely stays small. A new condition can influence navigation, status transitions, calculations, notifications, exports, and external callbacks. The difficult part is not expressing the condition. It is finding every place where the old assumption became part of the system and changing that contract without producing contradictory state.
+The platform supports claims workflows whose business rules and configuration differ across insurers. A change to one workflow must be understood alongside the API, application behaviour, persisted data, reporting, access controls, tests, and delivery configuration affected by that change.
 
-The approach I use starts by making rule ownership, ordering, and side effects visible. I separate pure decisions from persistence and delivery, characterize existing behavior with focused tests, migrate data additively, and define rollout and rollback before deployment. This has proved more reliable than treating each request as an isolated controller edit.
+This account describes my documented responsibilities within that team and system. It does not claim that I owned the platform architecture or every feature.
 
-The source system behind this case study uses PHP, Symfony, Doctrine, PostgreSQL, HTTP APIs, Symfony Messenger, webhook integrations, and a configurable business-rule layer. Names and examples below are synthetic.
+## My documented contribution
 
-## Context and constraints
+My documented professional responsibilities include:
 
-The platform supports workflows whose decisions evolve over time. Different configurations may share a default flow while overriding a small subset of rules, templates, thresholds, or integrations. A decision can be triggered from an API request, a back-office action, a scheduled command, or a replayed asynchronous job.
+- Developed PHP/Symfony and API Platform services, REST APIs, and background processing for a multi-insurer claims platform, including BRMS rules and insurer-specific workflows.
+- Maintained Doctrine ORM models and migrations, and PostgreSQL queries used for reporting and data exports.
+- Wrote PHPUnit, Jest, and functional regression tests, and investigated behaviour across code, configuration, and data.
+- Secured application and API access with Keycloak, OAuth 2.0, OpenID Connect, JWT, and role-based access control.
+- Maintained Docker, CircleCI, Helm, and OpenShift delivery configuration, and verified migrations, rollback procedures, and post-deployment smoke tests.
+- Contributed to Vue.js/Nuxt.js interfaces.
 
-Several constraints shape safe change:
+These are responsibilities, not claims that I designed the complete system, independently owned every change, or personally reviewed every line of its source.
 
-- Existing records were created under older rule sets and cannot simply be reinterpreted.
-- A shared rule may have configuration-specific overrides.
-- Events can produce more than one side effect, each with different retry behavior.
-- Old and new application versions may briefly coexist during rollout.
-- A retry must not silently turn one business intent into duplicate external effects.
-- Tests need to cover the shared mechanism and the meaningful variations without duplicating the entire suite.
+## A representative investigation pattern
 
-The practical consequence is that correctness spans code, configuration, persisted state, and deployment order.
+A representative investigation can be described as a generalized method without inventing a named incident: trace a workflow discrepancy through the relevant API and backend behaviour, applicable insurer configuration, and persisted or reported data; then maintain a regression check for the affected behaviour and a meaningful variation. This reflects the documented investigative and testing scope, not a report of a particular production incident or outcome.
 
-## System boundary
+## General design guidance
 
-Diagram summary: input is transformed into domain facts, rules derive a decision, the aggregate records the transition, and an outbox-style boundary delivers retryable effects.
+The evidence used for this account does not establish specific transaction, rules-engine, idempotency, or migration mechanisms, or my role in such design choices. They are not attributed here as historical system features or personal decisions.
 
-```mermaid
-flowchart LR
-    A[API or operator action] --> B[Validate input]
-    B --> C[Build domain facts]
-    C --> D[Evaluate ordered rules]
-    D --> E[Apply aggregate transition]
-    E --> F[(PostgreSQL)]
-    E --> G[Persist delivery intent]
-    G --> H[Async delivery]
-    H --> I[External boundary]
-    H -. retry .-> G
-```
+As general design guidance, a team changing configurable workflows should identify affected rules and consumers, test meaningful configuration variants, understand persistence and reporting effects, and plan migration, rollback, and delivery checks. These are recommendations, not claims about a particular implementation in the private platform.
 
-The important boundary is between deciding and delivering. A domain transition should be committed with enough durable intent to resume its side effects. The external call should not be the authority for whether the transition occurred, and an in-memory queue should not be the only record that work remains.
+## Validation and limits
 
-Access has a similarly explicit boundary. In the source system, OAuth 2.0 and OpenID Connect integrate with Keycloak-issued JWTs for identity, while application authorization applies role-based access control at route and use-case boundaries. Tests distinguish authentication failure from an authenticated caller lacking permission; possession of a valid token is not treated as blanket authority.
+My documented responsibilities include PHPUnit, Jest, functional regression testing, and checking migrations, rollback procedures, and post-deployment smoke tests. This summary does not claim that a specific test suite or deployment was run for this portfolio update. The anonymized account includes no employer or client names, private schemas, operational payloads, exact chronology, scale figures, or business-impact metrics.
 
-## Decisions and trade-offs
+## Evidence basis
 
-### Map the rule graph before editing
-
-I begin with a behavior map rather than a file list:
-
-1. Which facts feed the decision?
-2. Which rules read or mutate those facts?
-3. Which rule order is significant?
-4. Which aggregate fields and lifecycle events change?
-5. Which handlers, exports, notifications, or callbacks observe that change?
-6. Which configurations override any step?
-
-This exposes hidden coupling early. It also gives review a stable vocabulary: the change is not merely “an extra condition”; it is a change to an input, a decision, a transition, or an effect.
-
-### Keep configuration variation at the edge
-
-When the overall workflow is shared, duplicating it for one configuration creates two systems that will drift. I prefer a shared orchestration path with narrow extension points: a strategy for one computation, a provider for one payload, or a configuration override for one threshold.
-
-The trade-off is that extension points need explicit contracts. An override must state what it may change and what remains invariant. A generic hook with unrestricted access is flexible but makes future reasoning harder.
-
-### Make rule ordering testable
-
-Rules often depend on facts produced by earlier rules. That ordering should be declared and linted instead of living only in comments or incidental file names. For a synthetic example, an eligibility decision might require identity validation before a pricing exception and require both before route selection.
-
-Tests should prove not only that each rule can match, but also that competing rules resolve deterministically and terminate. A bounded maximum firing count is a useful final guard against accidental cycles; it does not replace correct dependency modelling.
-
-### Persist idempotency at the business boundary
-
-Retries are normal. Duplicate business outcomes are not. A stable business key and database uniqueness constraint prevent duplicate internal intent, and only the transaction that successfully reserves that key is enqueued.
-
-This is stronger than “check, then insert,” which can race. Delivery is still at least once across the external-call boundary unless the receiver honors the same idempotency key or provides an equivalent deduplication contract. Without that downstream guarantee, a crash after a successful call but before local acknowledgement produces an unknown outcome that must be reconciled rather than retried blindly.
-
-## Failure modes and safeguards
-
-| Failure mode | Safeguard |
-|---|---|
-| A narrow rule edit changes an unrelated route | Characterization tests plus a matrix of affected and unaffected paths |
-| Configuration-specific behavior replaces shared behavior accidentally | Explicit base-to-override resolution and tests for both paths |
-| Two workers create the same delivery intent | Durable business key and database-enforced uniqueness |
-| A worker crashes after an external success | Downstream idempotency when available; otherwise record an unknown outcome and reconcile before retrying |
-| A deployment mixes incompatible writers | Migration-first or drain-migrate-deploy ordering, documented before rollout |
-| A callback fails after domain state commits | Persisted delivery intent with bounded retry and observable status |
-| Old records lack a newly required field | Additive migration, defensive read compatibility, and explicit backfill rules |
-| A rule cycle never settles | Dependency validation, deterministic ordering, and a firing limit |
-| Logs turn an integration failure into a data leak | Structured, redacted failure context without credentials or complete payloads |
-
-## Testing and verification
-
-I layer validation so each level answers a different question:
-
-- **Unit tests** cover pure decisions, edge values, and competing rules.
-- **Integration tests** cover Doctrine mappings, migrations, constraints, and transactional reservation.
-- **API or behavior tests** cover the user-visible journey across configuration variants.
-- **Static analysis** catches incompatible types and unreachable assumptions before runtime.
-- **Rule linting** checks syntax, duplicate names, dependency declarations, and forbidden structures.
-- **Migration tests** apply forward changes to representative old state and prove rollback or compatibility behavior.
-- **Delivery tests** use fake transports to prove retries and idempotency without contacting an external service.
-
-The smallest relevant suite runs during implementation. Before acceptance, the full repository gate and the deployment-specific checks run against the exact head under review. A passing test on an older commit is not evidence for a newer one.
-
-## Outcome and lessons
-
-The durable lesson is that rule-heavy backends need an explicit change protocol. A useful protocol has four linked artifacts: a behavior map, an acceptance matrix, a rollout order, and a rollback path. Together they make the system easier to evolve and the review easier to challenge constructively.
-
-Another lesson is that configurable systems should share mechanisms, not duplicate them. Variation belongs at a narrow edge when the underlying business transition is the same. That keeps fixes, observability, and retry behavior consistent.
-
-Finally, production diagnosis improves when the system records why a decision occurred and which effect remains pending. Observability should expose state and decision categories while continuing to redact sensitive payloads.
-
-## Evidence basis and limitations
-
-This case study is based on verified work in a long-lived Symfony platform with Doctrine persistence, configurable domain rules, asynchronous effects, migrations, and multiple test layers. The diagram and eligibility example are original synthetic material; no private source code or operational data is reproduced.
-
-The study demonstrates an engineering method, not a claim that every legacy path has been redesigned. Exact organizations, domains, timelines, volumes, and business outcomes are intentionally omitted, and no unsupported performance or scale metric is asserted.
+The contribution statements above are grounded in my private professional records, which this public page does not expose. An independent reader can assess whether the scope is clear but cannot authenticate that private source from this page. No private implementation detail is used here to strengthen the claims.
