@@ -24,7 +24,7 @@ This page describes a recommended process. It does not assert that every public 
 A person defines the task and its boundaries; an agent explores and implements within them; appropriate automated checks run; an independent review evaluates the resulting change; and a person makes any required acceptance and external-delivery decision. Record each step against the relevant change. This is a recommendation, not a retrospective certification that every project used the same sequence.
 
 ```mermaid
-flowchart LR
+flowchart TD
     H[Human sets goal and authority] --> A[Agent implements within scope]
     A --> T[Automated checks]
     T --> R[Automated or human review, identified separately]
