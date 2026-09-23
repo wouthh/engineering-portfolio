@@ -10,7 +10,7 @@ A practical distinction between human-set goals, agent implementation, automated
 
 AI tools can assist with discovery, implementation, test design, and documentation. Their output does not prove that a feature is correct or that a person inspected its design. A useful engineering record states the task, who or what performed each step, what evidence was produced, and which decisions or checks remain unverified.
 
-This page describes a recommended process. It does not assert that every public repository or historical change followed it. Equipment Service Desk is a user-confirmed exception: a coding agent generated its original demonstration without Wout's supervision.
+This page describes a recommended process. It does not assert that every public repository or historical change followed it. Equipment Service Desk is a documented exception: a coding agent generated its original demonstration without the repository owner's supervision.
 
 ## Separate the roles
 
