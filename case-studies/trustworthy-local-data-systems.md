@@ -2,21 +2,19 @@
 
 General design guidance for provenance, uncertainty, reconstruction, migrations, indexing, and rollback in local-first tools.
 
-- Development period: Not precisely documented in this public case study
 - GitHub publication: Underlying source is not public
-- Context: Personal local-first applications; architecture and examples are sanitized
-- Current status: Public guidance maintained; private project status is not independently verifiable here
-- Last page review: 2026-09
+- Context: Personal local-data tools; the design material below is general guidance
+- Documentation status: Public guidance maintained; current project status is not independently verified here
 
 ## Evidence scope
 
-My approved CV supports local-data project work and records SQLite schema, migration, indexing, and test responsibilities. It does not independently establish every provenance, append-only journal, deletion, recovery, or export guarantee in the previous draft. Treat the detailed mechanisms, diagrams, and failure scenarios below as generalized illustrative design guidance, not a source-verified feature list or a claim that I personally designed or reviewed each mechanism.
+My approved CV describes personal Python/TypeScript tools for local archive search and export and event history using SQLite, recoverable projections, automated testing, and static analysis. This is personal-project scope, not employer or client delivery. The underlying source is not public, so readers cannot independently authenticate that private summary here. It does not establish every detailed behavior below or that I personally designed or reviewed each mechanism. The diagrams, mechanisms, and failure scenarios are general design guidance, not a verified feature list for either project.
 
 ## Summary
 
 Local-first software can offer strong privacy and resilience, but “stored on this computer” is not enough to make its conclusions trustworthy. A useful local data system must show where a record came from, distinguish retained evidence from derived interpretation, survive schema evolution, and make uncertainty visible rather than silently filling gaps.
 
-The case study draws on personal local-data project experience, but the underlying source repositories are not public. The approved professional summary supports the limited SQLite responsibilities stated above, not the implementation details of those projects. Technical mechanisms, diagrams, and scenarios below are generalized guidance rather than a verified feature list.
+This page pairs that bounded personal-project experience with reusable design guidance. The public page does not expose the private project sources, and the guidance below should not be read as a retrospective account of implemented features.
 
 One useful design principle is to preserve evidence with provenance, keep derived projections rebuildable, and state what an export can and cannot establish.
 
@@ -88,7 +86,7 @@ Explicit uncertainty improves both user experience and tests. The interface can 
 
 Large-file support needs two limits: a small bounded prefix for format detection and a separately configured maximum for normal import. Detection should not read an entire candidate merely to decide what parser to use.
 
-Streaming or chunked processing reduces memory pressure, but it complicates transactions and error reporting. The importer therefore records progress only at safe commit boundaries and reports the source item that failed without copying sensitive content into logs.
+Streaming or chunked processing reduces memory pressure, but it complicates transactions and error reporting. An importer should record progress only at safe commit boundaries and report a failed source item without copying sensitive content into logs.
 
 ### Keep migrations deterministic and recoverable
 
@@ -137,6 +135,6 @@ Another lesson is that privacy and testability reinforce each other. Synthetic f
 
 ## Evidence basis and limitations
 
-The diagrams, mechanisms, and failure scenarios on this page are generalized design guidance, not a verified feature list for a named or linked project. They use synthetic examples and do not expose records, identities, messages, source paths, screenshots, or investigative output. The documented professional scope is limited to the SQLite schema, migration, indexing, and testing responsibilities identified above; readers cannot authenticate the private source summary from this page.
+The diagrams, mechanisms, and failure scenarios on this page are generalized design guidance, not a verified feature list for a named or linked project. They use synthetic examples and do not expose records, identities, messages, source paths, screenshots, or investigative output. The documented personal-project scope is limited to the Python/TypeScript local tools, SQLite, recoverable projections, automated testing, and static analysis described above; readers cannot authenticate the private source summary from this page.
 
 Completeness remains source-dependent. Local-first design can preserve and explain available evidence; it cannot manufacture records that were never retained. The case study makes no claim that an export is a complete history beyond its declared inputs.

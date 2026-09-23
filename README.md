@@ -17,7 +17,7 @@ The lead case study describes my documented PHP/Symfony and API Platform work in
 
 ## Supporting engineering notes
 
-- [Failure-Closed Java Host Integration](notes/failure-closed-java-host-integration.md) is an anonymized account of documented Java/Swing contribution scope; the underlying source is not public, and fixture checks are distinct from live-host acceptance.
+- [Failure-Closed Java Host Integration](notes/failure-closed-java-host-integration.md) discusses personal Java/Swing interface and test contributions, with the detailed lifecycle material labelled as general guidance. Its source is not public. This is separate from professional Java/Kotlin/Spring assignments and the [public G-Earth Trade Assistant](https://github.com/wouthh/g-earth-trade-assistant).
 - [Trading-System and Automation Evolution](notes/trading-system-evolution.md) discusses historical public repositories without inferring personal authorship from account or commit metadata.
 
 ## How to read the evidence
