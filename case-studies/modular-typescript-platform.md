@@ -1,26 +1,28 @@
 # A Modular TypeScript Platform
 
-Separating domain logic, API contracts, web concerns, persistence, and operational safeguards as a TypeScript system grows.
+General design guidance for separating domain logic, API contracts, web concerns, persistence, and operational safeguards in TypeScript systems.
 
-- Development period: Not precisely documented in this public case study
 - GitHub publication: Underlying source is not public
-- Context: Personal platform; architecture and examples are sanitized
-- Current status: Active implementation; public case-study documentation maintained
-- Last verification: 2026-09
+- Context: TypeScript monorepo listed in an approved CV Selected Projects section; no underlying public source
+- Documentation status: General architecture guidance maintained; project status is not independently verified here
+
+## Evidence scope
+
+My approved CV's Selected Projects section lists a TypeScript monorepo with a bot, Fastify API, Nuxt/Vue interface, PostgreSQL, Redis, and automated tests. That supports the broad project scope only; it does not establish the architecture, detailed decisions, or failure scenarios below. The public page does not classify the project as employer/client work or infer a personal-project classification from its section placement. Treat the details as general guidance, not a verified feature list or a record that I personally designed or reviewed each detail.
 
 ## Summary
 
 A useful TypeScript application can grow from one process into a platform without becoming a collection of competing implementations. The key is to decide which component owns each kind of truth, then make dependencies cross explicit contracts instead of reaching through directory or process boundaries.
 
-This case study follows that evolution in a modular system comprising a long-running service, a Fastify API, a Nuxt web application, shared contracts, domain packages, PostgreSQL persistence, Redis-backed coordination, scheduled work, and external integrations. The project is known internally as Habbomon; its source repository is not public.
+The design example below sketches a modular platform with a long-running service, Fastify API, Nuxt web application, shared contracts, domain packages, PostgreSQL persistence, Redis-backed coordination, scheduled work, and external integrations. These details are illustrative guidance and are not independently verifiable from the private source summary.
 
-The engineering focus is broader than the product theme: preserving one domain spine while adding new delivery surfaces, keeping commands thin, making operational switches fail closed, and validating that generated or projected views do not become a second authority.
+The guidance focuses on preserving a domain boundary while adding delivery surfaces, keeping entry points thin, making operational switches fail closed, and preventing generated or projected views from becoming a second authority.
 
 ## Context and constraints
 
-The original application combined commands, scheduled tasks, persistence, integrations, and domain behavior in one TypeScript codebase. Later requirements introduced a web interface and HTTP API. A naive split could have copied rules from the service into API handlers or frontend code, producing several interpretations of the same state.
+A TypeScript application may begin with commands, scheduled tasks, persistence, integrations, and domain behavior in one codebase. If later requirements introduce a web interface and HTTP API, a naive split can copy rules into API handlers or frontend code, producing several interpretations of the same state.
 
-The platform also has real operational constraints:
+Design constraints to evaluate include:
 
 - Scheduled jobs must recover after restarts without blindly duplicating a known external outcome.
 - External writes must stop when authority or destination configuration is missing.
@@ -32,7 +34,7 @@ The platform also has real operational constraints:
 
 ## System boundary
 
-Diagram summary: the service owns domain behavior and side effects, the API exposes guarded operations and projections, the web application consumes those contracts, and shared packages contain types and rules that genuinely belong in more than one process.
+Illustrative diagram summary: a service owns domain behavior and side effects, an API exposes guarded operations and projections, a web application consumes those contracts, and shared packages contain types that genuinely belong in more than one process.
 
 ```mermaid
 flowchart TB
@@ -50,21 +52,21 @@ flowchart TB
     S --> P
 ```
 
-The web application owns presentation and interaction state. The API owns authentication, authorization, route guards, and HTTP projections. Neither owns duplicate business rules. Shared packages are deliberately small; “shared” is not a dumping ground for code that has not found an owner.
+In a design following this illustration, the web application owns presentation state, the API owns authentication and HTTP projections, and neither duplicates business rules. Shared packages stay small; “shared” is not a dumping ground for code that has not found an owner.
 
 ## Decisions and trade-offs
 
 ### Preserve one domain spine
 
-Existing domain procedures remain the path for writes. An API endpoint validates and authorizes the request, then calls the same procedure used by the established command surface. A read endpoint can use a purpose-built projection, but it cannot quietly mutate authoritative state.
+One useful pattern keeps domain procedures as the path for writes. An API endpoint validates and authorizes the request, then calls the procedure used by other entry points. A read endpoint can use a purpose-built projection, but it should not quietly mutate authoritative state.
 
 This approach can look less convenient than writing feature logic directly in a route. It pays off when a rule changes: one procedure and its tests change, while the API and service remain delivery mechanisms.
 
 ### Share contracts, not internals
 
-The workspace separates configuration, wire contracts, and selected domain types into packages with declared dependencies. A package may expose a stable request, response, or projection type. It does not expose database connections, process globals, or concrete adapters simply to avoid an import.
+An implementation can separate configuration, wire contracts, and selected domain types into packages with declared dependencies. A package may expose a stable request, response, or projection type without exposing database connections, process globals, or concrete adapters simply to avoid an import.
 
-Dependency rules make the intended direction reviewable. Entry points depend on application and domain layers; domain code depends on ports; adapters implement those ports. Forbidden reverse imports are checked automatically where the risk justifies it.
+Dependency rules can make the intended direction reviewable: entry points depend on application and domain layers, domain code depends on ports, and adapters implement those ports. Automated checks can flag reverse imports where the risk justifies it.
 
 ### Keep commands and routes thin
 
@@ -80,7 +82,7 @@ This distinction prevents a common platform failure: two writable stores that di
 
 ### Fail closed at operational boundaries
 
-A single explicit operational gate controls classes of active side effect. Missing, blank, false, or unrecognized configuration disables those effects. Registration-time guards stop new schedulers; execution-time guards protect already queued work and direct calls.
+A design can use a single explicit operational gate for classes of active side effect. Missing, blank, false, or unrecognized configuration disables those effects. Registration-time guards stop new schedulers; execution-time guards protect already queued work and direct calls.
 
 The trade-off is deliberate friction during reactivation. Re-enabling work requires a reviewed configuration, durable epoch or state marker, and a validation sequence. Silent fallback to active behavior would be easier and less safe.
 
@@ -102,7 +104,7 @@ A durable claim prevents concurrent workers from owning the same item, but it ca
 
 ## Testing and verification
 
-Validation is organized around boundaries:
+A validation plan can be organized around boundaries:
 
 - Domain tests exercise decisions without external clients.
 - Contract tests ensure API, web, and service packages agree on wire shapes.
@@ -113,11 +115,11 @@ Validation is organized around boundaries:
 - Static checks enforce types, dependency direction, configuration shape, and repository conventions.
 - Build checks prove the API and web packages consume the same reviewed contracts.
 
-One aggregate command defines the local completion gate, but its output identifies which focused stage failed. The exact feature branch and head are recorded before review so a successful run cannot be misapplied to later changes.
+Document an aggregate local completion gate and make its output identify the focused stage that failed. Record the branch and exact head before review so a successful run cannot be misapplied to later changes.
 
 ## Outcome and lessons
 
-The platform shape supports growth without making the web interface a replacement backend. New surfaces can reuse domain behavior, and projections can evolve without changing authority. Operational gates give maintainers a controlled way to stop side effects while retaining read-only or diagnostic capabilities.
+A platform with these boundaries can grow without making the web interface a replacement backend. New surfaces can reuse domain behavior, projections can evolve without changing authority, and operational gates can stop side effects while retaining read-only or diagnostic capabilities.
 
 The strongest lesson is that modularity is an ownership decision, not a folder count. A monorepo is useful when package boundaries clarify authority and contracts. It is harmful when packages merely obscure circular dependencies.
 
@@ -125,6 +127,6 @@ Another lesson is to design maintenance and recovery with the feature. Scheduler
 
 ## Evidence basis and limitations
 
-The architecture described here was verified against a TypeScript workspace containing separate service, Fastify API, Nuxt web, contract, configuration, and domain packages, plus PostgreSQL and Redis integration. The diagram and wording are original. Product-specific commands, identifiers, operational destinations, and private source are omitted.
+The diagram and wording are original generalized guidance, not a verified source architecture. The approved CV lists broad TypeScript monorepo scope involving a bot, API, web interface, PostgreSQL, Redis, and automated tests, but does not authenticate the detailed boundaries above. This page does not assert a personal or professional ownership category for that selected project.
 
-This case study does not claim that every module has reached the target architecture. It describes the boundaries used for current work and the safeguards that keep incremental migration reviewable.
+This page does not claim that any particular project has reached the target architecture or uses these exact boundaries. It describes safeguards that can make an incremental migration reviewable.

@@ -2,11 +2,11 @@
 
 From a historical Electron client and Node.js service toward clearer API boundaries, persistent state, deterministic simulation, and guarded operations.
 
-- Development period: Historical personal projects; exact years not asserted here
+- Development period: Historical repositories; exact years not asserted here
 - GitHub publication: Historical repositories are public
-- Context: Personal architecture study using sanitized examples
-- Current status: Historical and unmaintained; public note maintained
-- Last verification: 2026-09
+- Context: Project behavior summarized from public artifacts; personal authorship is not established here
+- Current status: Historical; current compatibility is not verified
+- Documentation update: 2026-09
 
 ## Summary
 
@@ -60,6 +60,8 @@ The system records a normalized intent with a stable idempotency key, validates 
 The historical repositories are not executed for this note. Repository evidence supports the Electron/React client, Node.js/Express service, MongoDB persistence, a queue, authentication, and external API adapter. Current compatibility is not inferred from old dependency manifests.
 
 A current implementation of the safer target would require synthetic provider fixtures, decimal boundary tests, idempotency and retry tests, restart recovery, simulation-to-application parity, and reconciliation tests. Live-provider validation would be a separately authorized step and would never use production credentials merely to demonstrate the portfolio.
+
+This note describes project history and general architecture lessons. Public repository content may support statements about the artifacts; account ownership or commit metadata is not used here as proof of who personally designed, implemented, or reviewed a change.
 
 ## Evidence basis and limitations
 

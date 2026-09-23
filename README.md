@@ -1,62 +1,35 @@
 # Engineering Portfolio
 
-Sanitized engineering case studies about reliable domain systems, modular platforms, local-first data, testing, security, and delivery.
+Anonymized case studies of professional backend responsibilities, related engineering experience, and clearly labelled general design guidance.
 
-> **Maintained documentation**
->
-> This repository explains engineering decisions and verification practices. It is not a substitute for the current inspectable code linked from my GitHub profile.
+## Professional backend case study
 
-## What this portfolio shows
+The lead case study describes my documented PHP/Symfony and API Platform work in a configurable claims platform: insurer-specific business rules, Doctrine and PostgreSQL reporting, regression tests, access control, and delivery verification. It distinguishes my supported responsibilities from team and system context, and from general design guidance.
 
-My work is backend-focused and often sits where business rules, data, integrations, and operational constraints meet. The recurring challenge is not merely implementing a happy path. It is changing behavior without losing compatibility, separating authority from derived state, making side effects recoverable, and proving that a change is safe enough to ship.
+## Other case studies
 
-The case studies cover PHP/Symfony domain systems, TypeScript platform boundaries, Python and TypeScript local-data tools, Java host integration, and responsible AI-assisted delivery. Technologies are included where they explain a decision; the extended map is in [Capabilities](capabilities.md).
-
-These case studies describe real engineering work using sanitized architecture, synthetic examples, and original diagrams. They omit proprietary code, operational data, and identifying organization details.
-
-## Inspectable public implementations
-
-[Equipment Service Desk](https://github.com/wouthh/equipment-service-desk) is an original synthetic PHP/Symfony backend for equipment requests, policy-based triage, technician assignment, and asynchronous reporting. It provides public code to inspect alongside the architectural case studies:
-
-- [Domain rules](https://github.com/wouthh/equipment-service-desk/blob/main/docs/domain.md) and [architecture](https://github.com/wouthh/equipment-service-desk/blob/main/docs/architecture.md) explain the boundaries and decisions.
-- [Implementation](https://github.com/wouthh/equipment-service-desk/tree/main/src) and [synthetic tests](https://github.com/wouthh/equipment-service-desk/tree/main/tests) make those decisions inspectable.
-- [Validation guide](https://github.com/wouthh/equipment-service-desk/blob/main/docs/testing.md) and [deliberate limits](https://github.com/wouthh/equipment-service-desk#deliberate-limits) describe how to check it and what it leaves out.
-
-This is a local reference implementation, with no production deployment, real-user, or measured-scale claim. It is a separate public example; the anonymised case studies below do not disclose their underlying source.
-
-[Hardcore Radio Logger](https://github.com/wouthh/hardcore-radio-logger) is a current public Python and SQLite project for local-first radio discovery and library reconciliation. Its README documents provenance, dry-run planning, and guarded synchronization; provider use is optional and authorization-dependent. It is a separate public codebase and does not disclose the private sources behind the case studies below.
-
-## Flagship case studies
-
-| Case study | Focus |
+| Case study | Evidence and scope |
 |---|---|
-| [Evolving Domain Rules in a Long-Lived Backend](case-studies/evolving-domain-rules.md) | Changing intertwined rules through explicit boundaries, focused tests, migrations, staged delivery, rollback, and production diagnosis. |
-| [A Modular TypeScript Platform](case-studies/modular-typescript-platform.md) | Separating domain logic, API contracts, web concerns, persistence, and operational safeguards as a system grows. |
-| [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) | Provenance, append-only evidence, uncertainty, deterministic reconstruction, migrations, indexing, and rollback. |
-| [Verified AI-Assisted Engineering](case-studies/verified-ai-assisted-engineering.md) | Keeping scope, decisions, validation, security, and acceptance under human control. |
+| [Evolving Domain Rules in a Professional Backend](case-studies/evolving-domain-rules.md) | My PHP/Symfony and API Platform work in a configurable claims platform, described without employer identifiers or private source details. |
+| [A Modular TypeScript Platform](case-studies/modular-typescript-platform.md) | Documented TypeScript monorepo work, with system descriptions distinguished from generalized architecture guidance. |
+| [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) | Local-data engineering scope, with implementation details and illustrative design guidance identified separately. |
+| [AI-Assisted Engineering: Scope and Evidence](case-studies/verified-ai-assisted-engineering.md) | Recommended process and the distinction between agent work, automated checks, agent review, and documented human inspection. |
 
 ## Supporting engineering notes
 
-- [Failure-Closed Java Host Integration](notes/failure-closed-java-host-integration.md) describes lifecycle ownership, readiness gates, bounded recovery, packaging, and verification around a third-party desktop host.
-- [Trading-System and Automation Evolution](notes/trading-system-evolution.md) follows a historical Electron and Node.js experiment from direct integration toward clearer boundaries, durable state, simulation, and operational safeguards.
+- [Failure-Closed Java Host Integration](notes/failure-closed-java-host-integration.md) discusses personal Java/Swing interface and test contributions, with the detailed lifecycle material labelled as general guidance. Its source is not public. This is separate from professional Java/Kotlin/Spring assignments and the [public G-Earth Trade Assistant](https://github.com/wouthh/g-earth-trade-assistant).
+- [Trading-System and Automation Evolution](notes/trading-system-evolution.md) discusses historical public repositories without inferring personal authorship from account or commit metadata.
 
 ## How to read the evidence
 
-Each page separates context, system boundaries, decisions, failure modes, verification, and limitations. Public repositories are linked only when their source can be inspected. Non-public work is represented with newly written explanations, original diagrams, and synthetic examples rather than copied source.
+Each page identifies whether a statement is supported by documented professional experience, inspectable public project material, or generalized guidance. See the [capabilities map](capabilities.md) for the relationship between supported scope and the case studies. Source code can support a claim about what a project contains; by itself, it does not establish who personally designed, reviewed, or tested it. Automated tests and agent review are not described as human inspection. Tests documented by a repository are not represented as having run during this update.
 
-Claims are deliberately qualitative unless a result is reproducible from public material. A test strategy or migration plan is evidence of engineering practice; it is not converted into an invented scale or business-impact number.
+Private-source summaries, whether professional or personal, remain limited to approved, non-identifying scope. An independent reader may not be able to authenticate them from this portfolio. The public portfolio contains no employer or client names, private repository URLs, operational data, or proprietary implementation material.
 
-## Engineering themes
+## Experimental example
 
-- **Domain change:** make rule ownership and ordering explicit before changing behavior.
-- **Reliable delivery:** connect acceptance criteria to focused tests, full gates, rollout, and rollback.
-- **Data trust:** preserve provenance and distinguish authoritative records from rebuildable projections.
-- **Secure integration:** fail closed on missing authority, isolate credentials, and bound side effects.
-- **Operational clarity:** make state, failure, recovery, and remaining uncertainty observable.
-- **Responsible tooling:** use AI assistance inside a reviewable, human-owned engineering process.
+[Equipment Service Desk](https://github.com/wouthh/equipment-service-desk) is an AI-generated synthetic PHP/Symfony demonstration. A coding agent generated it without my supervision during its original development. It is not a client project and has no production deployment or real users. It is presented only as an experiment, not as evidence of my personally supervised implementation or professional experience.
 
 ## Status
 
-The documentation is maintained as the public portfolio evolves. Historical systems remain historical; updating their explanation does not imply current compatibility or maintenance.
-
-New material must continue to meet the same evidence, privacy, accessibility, and truthful-status standards before it joins the navigation.
+This portfolio is maintained documentation. Each page states its evidence limits and current status; updating a description does not establish new testing, deployment, or human review.

@@ -1,26 +1,28 @@
 # Trustworthy Local Data Systems
 
-Designing provenance, append-only evidence, uncertainty, deterministic reconstruction, migrations, indexing, and rollback into local-first tools.
+General design guidance for provenance, uncertainty, reconstruction, migrations, indexing, and rollback in local-first tools.
 
-- Development period: Not precisely documented in this public case study
 - GitHub publication: Underlying source is not public
-- Context: Personal local-first applications; architecture and examples are sanitized
-- Current status: Active implementations; public case-study documentation maintained
-- Last verification: 2026-09
+- Context: Personal local-data tools; the design material below is general guidance
+- Documentation status: Public guidance maintained; current project status is not independently verified here
+
+## Evidence scope
+
+My approved CV describes personal Python/TypeScript tools for local archive search and export and event history using SQLite, recoverable projections, automated testing, and static analysis. This is personal-project scope, not employer or client delivery. The underlying source is not public, so readers cannot independently authenticate that private summary here. It does not establish every detailed behavior below or that I personally designed or reviewed each mechanism. The diagrams, mechanisms, and failure scenarios are general design guidance, not a verified feature list for either project.
 
 ## Summary
 
 Local-first software can offer strong privacy and resilience, but “stored on this computer” is not enough to make its conclusions trustworthy. A useful local data system must show where a record came from, distinguish retained evidence from derived interpretation, survive schema evolution, and make uncertainty visible rather than silently filling gaps.
 
-This case study combines lessons from CacheTyrant and TyrantLedger. Both work with locally retained application artifacts, but at different layers. One focuses on bounded import, normalization, reconstruction, browsing, and export. The other focuses on durable capture, append-only journaling, derived indexes, and guarded projections. Neither underlying source repository is public, and no real content or user identity is reproduced here.
+This page pairs that bounded personal-project experience with reusable design guidance. The public page does not expose the private project sources, and the guidance below should not be read as a retrospective account of implemented features.
 
-The shared design principle is simple: authoritative evidence is preserved with provenance; projections are rebuildable; exports state what they can and cannot prove.
+One useful design principle is to preserve evidence with provenance, keep derived projections rebuildable, and state what an export can and cannot establish.
 
 ## Context and constraints
 
 Local application data is often partial. Files may rotate, caches may omit older records, timestamps may represent observation rather than creation, and two sources may contain overlapping representations of one event. Treating every row as equally authoritative creates false certainty.
 
-The systems therefore need to handle:
+A general design checklist for local-data systems includes:
 
 - multiple local source formats and schema versions;
 - large inputs without unbounded reads;
@@ -32,11 +34,11 @@ The systems therefore need to handle:
 - exports that must be source-faithful without overstating completeness;
 - privacy boundaries that exclude unrelated local data.
 
-The software must also remain useful offline. Network lookup cannot be the hidden requirement for understanding or verifying a local record.
+Local-first designs should remain useful offline; network lookup should not be a hidden requirement for understanding or verifying a local record.
 
 ## System boundary
 
-Diagram summary: immutable or append-only observations enter through bounded adapters, canonical records retain provenance, and rebuildable indexes and exports are derived from that authority.
+Illustrative diagram summary: bounded observations enter through adapters, canonical records retain provenance, and rebuildable indexes and exports derive from that authority.
 
 ```mermaid
 flowchart LR
@@ -52,7 +54,7 @@ flowchart LR
     R -. rebuild .-> X
 ```
 
-The canonical layer stores what was observed, where it came from, and how confidently records can be related. The index is an acceleration structure. The browser is a view. The export is a declared interpretation. None silently replaces the canonical record.
+In a design following this model, the canonical layer stores observations, provenance, and uncertainty; indexes accelerate lookup, browsers present views, and exports state their interpretation. None silently replaces the canonical record.
 
 ## Decisions and trade-offs
 
@@ -84,7 +86,7 @@ Explicit uncertainty improves both user experience and tests. The interface can 
 
 Large-file support needs two limits: a small bounded prefix for format detection and a separately configured maximum for normal import. Detection should not read an entire candidate merely to decide what parser to use.
 
-Streaming or chunked processing reduces memory pressure, but it complicates transactions and error reporting. The importer therefore records progress only at safe commit boundaries and reports the source item that failed without copying sensitive content into logs.
+Streaming or chunked processing reduces memory pressure, but it complicates transactions and error reporting. An importer should record progress only at safe commit boundaries and report a failed source item without copying sensitive content into logs.
 
 ### Keep migrations deterministic and recoverable
 
@@ -108,7 +110,7 @@ Forward compatibility is not assumed. A future unsupported schema should fail wi
 
 ## Testing and verification
 
-Real local content is unnecessary for most verification. The test strategy uses synthetic fixtures designed to cover structure and failure modes:
+Real local content is unnecessary for most verification. A representative test plan can use synthetic fixtures to cover structure and failure modes:
 
 - minimal valid inputs for each supported version;
 - duplicates and conflicting observations;
@@ -125,7 +127,7 @@ Packaging validation is kept distinct from application semantics. A source packa
 
 ## Outcome and lessons
 
-The result is a system whose conclusions can be challenged. A user or maintainer can ask where a record came from, which parser interpreted it, which projection displayed it, and what information was unavailable. Recovery has a defined source of truth instead of relying on whichever database file still opens.
+A system built with these boundaries makes its conclusions easier to challenge: a user or maintainer can ask where a record came from, which parser interpreted it, which projection displayed it, and what information was unavailable. Recovery has a defined source of truth instead of relying on whichever database file still opens.
 
 The strongest lesson is to model evidence quality before building a polished browser. Provenance and uncertainty added later are usually incomplete because the original import already discarded context.
 
@@ -133,6 +135,6 @@ Another lesson is that privacy and testability reinforce each other. Synthetic f
 
 ## Evidence basis and limitations
 
-The described practices were verified against two local-first projects with provenance-aware imports, append-only records, embedded migrations, synthetic fixtures, rebuildable views, guarded exports, and repository-level privacy checks. The importer uses Python, PySide6, and SQLite; the journal uses TypeScript and SQLite. This page contains no real records, identities, messages, source paths, screenshots, or investigative output.
+The diagrams, mechanisms, and failure scenarios on this page are generalized design guidance, not a verified feature list for a named or linked project. They use synthetic examples and do not expose records, identities, messages, source paths, screenshots, or investigative output. The documented personal-project scope is limited to the Python/TypeScript local tools, SQLite, recoverable projections, automated testing, and static analysis described above; readers cannot authenticate the private source summary from this page.
 
 Completeness remains source-dependent. Local-first design can preserve and explain available evidence; it cannot manufacture records that were never retained. The case study makes no claim that an export is a complete history beyond its declared inputs.
