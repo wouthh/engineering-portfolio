@@ -6,7 +6,7 @@ From a historical Electron client and Node.js service toward clearer API boundar
 - GitHub publication: Historical repositories are public
 - Context: Personal architecture study using sanitized examples
 - Current status: Historical and unmaintained; public note maintained
-- Last verification: 2026-09
+- Documentation update: 2026-09
 
 ## Summary
 
