@@ -2,15 +2,13 @@
 
 General design guidance for separating domain logic, API contracts, web concerns, persistence, and operational safeguards in TypeScript systems.
 
-- Development period: Not precisely documented in this public case study
 - GitHub publication: Underlying source is not public
-- Context: Personal platform; architecture and examples are sanitized
-- Current status: Public guidance maintained; private project status is not independently verifiable here
-- Last page review: 2026-09
+- Context: TypeScript monorepo listed in an approved CV Selected Projects section; no underlying public source
+- Documentation status: General architecture guidance maintained; project status is not independently verified here
 
 ## Evidence scope
 
-My approved CV supports work on a TypeScript monorepo with a bot, Fastify API, Nuxt/Vue interface, PostgreSQL, Redis, and automated tests. That private summary does not establish the architecture, detailed decisions, or failure scenarios below. Treat them as generalized design guidance, not a verified feature list or a record that I personally designed or reviewed each detail.
+My approved CV's Selected Projects section lists a TypeScript monorepo with a bot, Fastify API, Nuxt/Vue interface, PostgreSQL, Redis, and automated tests. That supports the broad project scope only; it does not establish the architecture, detailed decisions, or failure scenarios below. The public page does not classify the project as employer/client work or infer a personal-project classification from its section placement. Treat the details as general guidance, not a verified feature list or a record that I personally designed or reviewed each detail.
 
 ## Summary
 
@@ -129,6 +127,6 @@ Another lesson is to design maintenance and recovery with the feature. Scheduler
 
 ## Evidence basis and limitations
 
-The diagram and wording are original generalized guidance, not a verified source architecture. The documented professional scope is limited to TypeScript monorepo work involving a bot, API, web interface, PostgreSQL, Redis, and automated tests; the private source summary cannot authenticate the detailed boundaries above.
+The diagram and wording are original generalized guidance, not a verified source architecture. The approved CV lists broad TypeScript monorepo scope involving a bot, API, web interface, PostgreSQL, Redis, and automated tests, but does not authenticate the detailed boundaries above. This page does not assert a personal or professional ownership category for that selected project.
 
 This page does not claim that any particular project has reached the target architecture or uses these exact boundaries. It describes safeguards that can make an incremental migration reviewable.
