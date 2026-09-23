@@ -1,24 +1,18 @@
 # Engineering capabilities
 
-This map keeps the profile concise while showing where individual technologies fit into actual engineering responsibilities.
+This map connects supported professional responsibilities and other documented engineering scope to the relevant case study. It does not imply that every linked implementation was personally reviewed.
 
-| Capability | Technologies used naturally | Evidence in this portfolio |
+| Capability | Technologies or practice | Evidence in this portfolio |
 |---|---|---|
-| Domain backends and evolving business rules | PHP, Symfony, Doctrine, PostgreSQL, rules engines | [Evolving Domain Rules](case-studies/evolving-domain-rules.md) |
-| APIs and asynchronous processing | HTTP APIs, Symfony Messenger, Node.js, Fastify, queues, webhooks | [Evolving Domain Rules](case-studies/evolving-domain-rules.md), [Modular TypeScript Platform](case-studies/modular-typescript-platform.md) |
-| Authentication and authorization | OAuth 2.0, OpenID Connect, Keycloak, JWT, RBAC | [Evolving Domain Rules](case-studies/evolving-domain-rules.md) |
-| Modular full-stack systems | TypeScript, Node.js, Fastify, Nuxt, Vue, React, Electron | [Modular TypeScript Platform](case-studies/modular-typescript-platform.md), [Trading-System Evolution](notes/trading-system-evolution.md) |
-| Local-first applications and data trust | Python, PySide6, TypeScript, SQLite, append-only records | [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) |
-| JVM host integrations | Java 21, Swing, lifecycle ownership, failure-closed configuration | [Failure-Closed Java Host Integration](notes/failure-closed-java-host-integration.md) |
-| Data workflows | Bounded imports, normalization, exports, reconciliation, data quality | [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) |
-| Persistence | PostgreSQL, SQLite, Redis, MongoDB | [Evolving Domain Rules](case-studies/evolving-domain-rules.md), [Modular TypeScript Platform](case-studies/modular-typescript-platform.md), [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md), [Trading-System Evolution](notes/trading-system-evolution.md) |
-| Delivery and operations | Staged delivery, CI gates, smoke testing, observability, rollback | [Verified AI-Assisted Engineering](case-studies/verified-ai-assisted-engineering.md) |
-| Verification and recovery | Unit and integration tests, static analysis, migrations, rollback, smoke testing, production diagnosis | [Verified AI-Assisted Engineering](case-studies/verified-ai-assisted-engineering.md), [Evolving Domain Rules](case-studies/evolving-domain-rules.md) |
+| Professional backend services and business workflows | PHP, Symfony, API Platform, BRMS workflows | [Evolving Domain Rules](case-studies/evolving-domain-rules.md) |
+| Professional persistence and reporting | Doctrine ORM, migrations, PostgreSQL | [Evolving Domain Rules](case-studies/evolving-domain-rules.md) |
+| Professional testing and delivery | PHPUnit, Jest, functional regression tests, Docker, CircleCI, Helm, OpenShift | [Evolving Domain Rules](case-studies/evolving-domain-rules.md) |
+| Professional authentication and authorization | Keycloak, OAuth 2.0, OpenID Connect, JWT, RBAC | [Evolving Domain Rules](case-studies/evolving-domain-rules.md) |
+| TypeScript systems and interfaces | TypeScript, Node.js, Fastify, Nuxt, Vue, React, Electron | [Modular TypeScript Platform](case-studies/modular-typescript-platform.md), [Trading-System Evolution](notes/trading-system-evolution.md) |
+| Personal local-data project scope | Python, TypeScript, SQLite, recoverable projections, automated testing, static analysis | [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) |
+| General local-data design guidance | Provenance, bounded imports, migrations, indexing, recovery, exports | [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) |
+| Personal Java/Swing integration | Java, Swing, third-party desktop host | [Failure-Closed Java Host Integration](notes/failure-closed-java-host-integration.md) |
+| Separate professional JVM assignments | Java, Kotlin, Spring | Distinct from the personal integration note and the public G-Earth Trade Assistant |
+| Broader self-reported experience | ETL, SQL Server, MySQL/MariaDB, Kubernetes, Railway, Cloudflare | Described as broader experience, not evidence from the professional case studies above |
 
-Each linked page identifies the relevant boundary, evidence basis, and limitations.
-
-For inspectable PHP/Symfony code, see [Equipment Service Desk](README.md#inspectable-public-implementations), a synthetic reference implementation with documented tests and limits.
-
-## Broader stack experience
-
-The following self-reported experience is intentionally not presented as evidence from a specific public case study: REST API design, Kotlin, Spring Boot, Spring Batch, ETL, CSV processing, reporting, SQL Server, MySQL/MariaDB, Docker, Kubernetes, OpenShift, Helm, Railway, and Cloudflare. It belongs here rather than on the profile's first screen so the distinction between demonstrated case-study evidence and broader experience remains clear.
+The professional backend case study does not attribute Redis to the claims platform. Private-source specifics and unverified outcomes are omitted.
