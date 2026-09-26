@@ -10,6 +10,7 @@ This map connects supported professional responsibilities and other documented e
 | Professional authentication and authorization | Keycloak, OAuth 2.0, OpenID Connect, JWT, RBAC | [Evolving Domain Rules](case-studies/evolving-domain-rules.md) |
 | TypeScript systems and interfaces | TypeScript, Node.js, Fastify, Nuxt, Vue, React, Electron | [Modular TypeScript Platform](case-studies/modular-typescript-platform.md), [Trading-System Evolution](notes/trading-system-evolution.md) |
 | Personal local-data project scope | Python, TypeScript, SQLite, recoverable projections, automated testing, static analysis | [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) |
+| Public project behaviour and failure handling | Python, SQLite, ordered source fallback, provenance | [Resilient Radio Discovery](case-studies/resilient-radio-discovery.md) |
 | General local-data design guidance | Provenance, bounded imports, migrations, indexing, recovery, exports | [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) |
 | Personal Java/Swing integration | Java, Swing, third-party desktop host | [Failure-Closed Java Host Integration](notes/failure-closed-java-host-integration.md) |
 | Separate professional JVM assignments | Java, Kotlin, Spring | Distinct from the personal integration note and the public G-Earth Trade Assistant |
