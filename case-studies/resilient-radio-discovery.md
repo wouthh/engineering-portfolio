@@ -3,6 +3,7 @@
 How a public local-first tool separates optional radio-source outages from local workflow failures.
 
 - **Public source:** [Hardcore Radio Logger](https://github.com/wouthh/hardcore-radio-logger), inspected at `main` commit `225b53bd2f4409759ce8089f91aa2f08eabe87cc`, the merge commit for [PR 6](https://github.com/wouthh/hardcore-radio-logger/pull/6).
+- **Status:** Maintained documentation of the pinned public source snapshot; subsequent project changes and current runtime status are not assessed here.
 - **Evidence boundary:** This page describes repository behaviour at that commit. It does not establish who authored, reviewed, or tested the change, or whether it ran in a deployed environment.
 
 ## Summary
