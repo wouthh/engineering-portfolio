@@ -13,6 +13,7 @@ The lead case study describes my documented PHP/Symfony and API Platform work in
 | [Evolving Domain Rules in a Professional Backend](case-studies/evolving-domain-rules.md) | My PHP/Symfony and API Platform work in a configurable claims platform, described without employer identifiers or private source details. |
 | [A Modular TypeScript Platform](case-studies/modular-typescript-platform.md) | Documented TypeScript monorepo work, with system descriptions distinguished from generalized architecture guidance. |
 | [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) | Local-data engineering scope, with implementation details and illustrative design guidance identified separately. |
+| [Resilient Radio Discovery](case-studies/resilient-radio-discovery.md) | Public-source analysis of ordered metadata fallback, provenance, and failure handling; it makes no personal-authorship or deployment claim. |
 | [AI-Assisted Engineering: Scope and Evidence](case-studies/verified-ai-assisted-engineering.md) | Recommended process and the distinction between agent work, automated checks, agent review, and documented human inspection. |
 
 ## Supporting engineering notes
