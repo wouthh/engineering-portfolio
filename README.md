@@ -1,6 +1,6 @@
 # Engineering Portfolio
 
-Anonymized case studies of professional backend responsibilities, related engineering experience, and clearly labelled general design guidance.
+Anonymized case studies of professional backend responsibilities, related engineering experience, owner-reported AI-assisted engineering workflow design, and clearly labelled general design guidance.
 
 ## Professional backend case study
 
@@ -14,7 +14,7 @@ The lead case study describes my documented PHP/Symfony and API Platform work in
 | [A Modular TypeScript Platform](case-studies/modular-typescript-platform.md) | Documented TypeScript monorepo work, with system descriptions distinguished from generalized architecture guidance. |
 | [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) | Local-data engineering scope, with implementation details and illustrative design guidance identified separately. |
 | [Resilient Radio Discovery](case-studies/resilient-radio-discovery.md) | Public-source analysis of ordered metadata fallback, provenance, and failure handling; it makes no personal-authorship or deployment claim. |
-| [AI-Assisted Engineering: Scope and Evidence](case-studies/verified-ai-assisted-engineering.md) | Recommended process and the distinction between agent work, automated checks, agent review, and documented human inspection. |
+| [AI-Assisted Engineering: Scope and Evidence](case-studies/verified-ai-assisted-engineering.md) | Owner-reported workflow-design contribution and recommended process, distinguishing agent work, automated checks, agent review, and documented human inspection. |
 
 ## Supporting engineering notes
 
@@ -23,7 +23,7 @@ The lead case study describes my documented PHP/Symfony and API Platform work in
 
 ## How to read the evidence
 
-Each page identifies whether a statement is supported by documented professional experience, inspectable public project material, or generalized guidance. See the [capabilities map](capabilities.md) for the relationship between supported scope and the case studies. Source code can support a claim about what a project contains; by itself, it does not establish who personally designed, reviewed, or tested it. Automated tests and agent review are not described as human inspection. Tests documented by a repository are not represented as having run during this update.
+Each page identifies whether a statement is supported by documented professional experience, inspectable public project material, owner-reported contribution, or generalized guidance. See the [capabilities map](capabilities.md) for the relationship between supported scope and the case studies. Source code can support a claim about what a project contains; by itself, it does not establish who personally designed, reviewed, or tested it. Automated tests and agent review are not described as human inspection. Tests documented by a repository are not represented as having run during this update.
 
 Private-source summaries, whether professional or personal, remain limited to approved, non-identifying scope. An independent reader may not be able to authenticate them from this portfolio. The public portfolio contains no employer or client names, private repository URLs, operational data, or proprietary implementation material.
 

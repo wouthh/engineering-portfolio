@@ -1,16 +1,22 @@
 # AI-Assisted Engineering: Scope and Evidence
 
-A practical distinction between human-set goals, agent implementation, automated checks, agent review, and documented human inspection.
+Owner-reported workflow-design contribution and a practical distinction between human-set goals, agent implementation, automated checks, agent review, and documented human inspection.
 
-- Scope: Recommended engineering process and bounded examples
-- Publication status: Guidance, not an audit of every repository or past change
-- Current status: Maintained guidance; not a retrospective audit of historical changes
+- Scope: Owner-reported workflow-design contribution, recommended engineering process and bounded examples
+- Publication status: Contribution statement and guidance, not an audit of every repository or past change
+- Current status: Maintained contribution statement and guidance; not a retrospective audit of historical changes
+
+## My contribution
+
+Designed reusable, repository-specific workflows that coordinate coding agents, automated tests and pull-request reviews, with explicit task boundaries, validation checks and acceptance criteria.
+
+Contribution basis: owner-reported workflow-design practice.
 
 ## Summary
 
 AI tools can assist with discovery, implementation, test design, and documentation. Their output does not prove that a feature is correct or that a person inspected its design. A useful engineering record states the task, who or what performed each step, what evidence was produced, and which decisions or checks remain unverified.
 
-This page describes a recommended process. It does not assert that every public repository or historical change followed it. Equipment Service Desk is a documented exception: a coding agent generated its original demonstration without the repository owner's supervision.
+The following sections describe a recommended process. They do not assert that every public repository or historical change followed it. Equipment Service Desk is a documented exception: a coding agent generated its original demonstration without the repository owner's supervision.
 
 ## Separate the roles
 
@@ -44,4 +50,4 @@ When a claim depends on private or otherwise unavailable evidence, summarize onl
 
 ## Limits
 
-This page is guidance, not proof that a particular review, deployment, or acceptance occurred. The [AI-Assisted Engineering Playbook](https://github.com/wouthh/ai-assisted-engineering-playbook) contains reusable recommendations and fictional examples. Each project description must identify its own evidence and status rather than inherit a blanket claim of human verification.
+The process guidance is not proof that a particular review, deployment, or acceptance occurred. The [AI-Assisted Engineering Playbook](https://github.com/wouthh/ai-assisted-engineering-playbook) contains reusable recommendations and fictional examples. Each project description must identify its own evidence and status rather than inherit a blanket claim of human verification.
