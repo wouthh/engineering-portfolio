@@ -1,6 +1,6 @@
 # Engineering capabilities
 
-This map connects supported professional responsibilities and other documented engineering scope to the relevant case study. It does not imply that every linked implementation was personally reviewed.
+This map connects supported professional responsibilities, owner-reported workflow-design contribution, and other documented engineering scope to the relevant case study. It does not imply that every linked implementation was personally reviewed.
 
 | Capability | Technologies or practice | Evidence in this portfolio |
 |---|---|---|
@@ -14,6 +14,7 @@ This map connects supported professional responsibilities and other documented e
 | General local-data design guidance | Provenance, bounded imports, migrations, indexing, recovery, exports | [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) |
 | Personal Java/Swing integration | Java, Swing, third-party desktop host | [Failure-Closed Java Host Integration](notes/failure-closed-java-host-integration.md) |
 | Separate professional JVM assignments | Java, Kotlin, Spring | Distinct from the personal integration note and the public G-Earth Trade Assistant |
+| AI-assisted engineering workflows | Workflow design, coding-agent orchestration, automated testing and pull-request review | [Owner-reported contribution and workflow guidance](case-studies/verified-ai-assisted-engineering.md#my-contribution) |
 | Broader self-reported experience | ETL, SQL Server, MySQL/MariaDB, Kubernetes, Railway, Cloudflare | Described as broader experience, not evidence from the professional case studies above |
 
 The professional backend case study does not attribute Redis to the claims platform. Private-source specifics and unverified outcomes are omitted.
