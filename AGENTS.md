@@ -19,5 +19,5 @@ This repository presents sanitized engineering case studies for `wouthh`.
 - Keep case-study contribution claims within the cited evidence. Label illustrative architecture and reusable engineering advice as guidance rather than historical implementation.
 - Describe public repository behaviour separately from personal contribution, review, testing, or deployment. Account ownership, agent authorization, and automated review do not prove personal source review.
 - Keep Equipment Service Desk out of selected professional work and flagship implementation sections. If retained, link it once in a secondary experimental section and state its user-confirmed origin without implying supervision.
-- Preserve the profile's ordered four-project selection: engineering-portfolio, hardcore-radio-logger, ai-assisted-engineering-playbook, g-earth-trade-assistant.
+- Preserve the profile's ordered six-project selection, as recorded in the profile repository's guidance: engineering-portfolio, hardcore-radio-logger, ai-assisted-engineering-playbook, g-earth-facts, vesktop-presence-guard, fedora-omen-tools.
 - That order applies to the profile README and profile pins. Keep this repository's README focused on navigation within its own case studies and notes; it does not repeat the profile's project cards.
