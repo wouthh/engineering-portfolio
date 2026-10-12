@@ -50,4 +50,4 @@ When a claim depends on private or otherwise unavailable evidence, summarize onl
 
 ## Limits
 
-The process guidance is not proof that a particular review, deployment, or acceptance occurred. The [AI-Assisted Engineering Playbook](https://github.com/wouthh/ai-assisted-engineering-playbook) contains reusable recommendations and fictional examples. Each project description must identify its own evidence and status rather than inherit a blanket claim of human verification.
+The process guidance is not proof that a particular review, deployment, or acceptance occurred. The [AI-Assisted Engineering Playbook](https://github.com/wouthh/ai-assisted-engineering-playbook) contains reusable recommendations, fictional examples and tested utilities, including the `prloop` review wait loop and a Git identity guard. Each project description must identify its own evidence and status rather than inherit a blanket claim of human verification.
