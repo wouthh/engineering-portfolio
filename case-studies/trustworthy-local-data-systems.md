@@ -1,140 +1,72 @@
 # Trustworthy Local Data Systems
 
-General design guidance for provenance, uncertainty, reconstruction, migrations, indexing, and rollback in local-first tools.
+Design decisions in two personal local-first tools I built: a Python archive with search and export, and a TypeScript event-history ledger. Both read a desktop application's local caches and stores, keep their data on the user's machine, and use SQLite.
 
-- GitHub publication: Underlying source is not public
-- Context: Personal local-data tools; the design material below is general guidance
-- Documentation status: Public guidance maintained; current project status is not independently verified here
+- **Stack:** Python, PySide6, TypeScript, SQLite (FTS5 and `node:sqlite`), pytest, Vitest, mypy, ruff, ESLint
+- **Source:** private personal projects
 
-## Evidence scope
+## The problem
 
-My approved CV describes personal Python/TypeScript tools for local archive search and export and event history using SQLite, recoverable projections, automated testing, and static analysis. This is personal-project scope, not employer or client delivery. The underlying source is not public, so readers cannot independently authenticate that private summary here. It does not establish every detailed behavior below or that I personally designed or reviewed each mechanism. The diagrams, mechanisms, and failure scenarios are general design guidance, not a verified feature list for either project.
+Local application data is partial. Caches rotate, older records disappear, timestamps describe when something was observed rather than when it was created, and two sources can describe the same event differently. If a tool treats every row as equally true, its search results and exports claim more than the evidence supports.
 
-## Summary
-
-Local-first software can offer strong privacy and resilience, but “stored on this computer” is not enough to make its conclusions trustworthy. A useful local data system must show where a record came from, distinguish retained evidence from derived interpretation, survive schema evolution, and make uncertainty visible rather than silently filling gaps.
-
-This page pairs that bounded personal-project experience with reusable design guidance. The public page does not expose the private project sources, and the guidance below should not be read as a retrospective account of implemented features.
-
-One useful design principle is to preserve evidence with provenance, keep derived projections rebuildable, and state what an export can and cannot establish.
-
-## Context and constraints
-
-Local application data is often partial. Files may rotate, caches may omit older records, timestamps may represent observation rather than creation, and two sources may contain overlapping representations of one event. Treating every row as equally authoritative creates false certainty.
-
-A general design checklist for local-data systems includes:
-
-- multiple local source formats and schema versions;
-- large inputs without unbounded reads;
-- duplicate or overlapping observations;
-- explicit deletions or disappearances;
-- attachments or binary evidence with separate retention rules;
-- interrupted import, migration, or index construction;
-- platform-specific packaging and activation;
-- exports that must be source-faithful without overstating completeness;
-- privacy boundaries that exclude unrelated local data.
-
-Local-first designs should remain useful offline; network lookup should not be a hidden requirement for understanding or verifying a local record.
-
-## System boundary
-
-Illustrative diagram summary: bounded observations enter through adapters, canonical records retain provenance, and rebuildable indexes and exports derive from that authority.
+So I built both tools around one rule: retained evidence is the authority, and everything else is a projection that can be thrown away and rebuilt.
 
 ```mermaid
 flowchart LR
-    A[Local source A] --> I[Bounded import adapters]
-    B[Local source B] --> I
-    C[Live local observation] --> J[Append-only journal]
+    S[Local sources] --> I[Bounded import adapters]
     I --> N[Normalize with provenance]
-    J --> N
-    N --> R[(Canonical local records)]
-    R --> X[Rebuildable index]
-    R --> P[Projection and browser]
-    R --> E[Source-faithful export]
-    R -. rebuild .-> X
+    N --> J[(Append-only authority)]
+    J --> X[Rebuildable SQLite projections]
+    J --> E[Export with manifest]
+    J -. rebuild .-> X
 ```
 
-In a design following this model, the canonical layer stores observations, provenance, and uncertainty; indexes accelerate lookup, browsers present views, and exports state their interpretation. None silently replaces the canonical record.
+Diagram summary: local sources pass through bounded import adapters and normalization that records provenance, into an append-only authority layer. SQLite projections and exports derive from that layer, and projections can be rebuilt from it at any time.
 
-## Decisions and trade-offs
+## Decisions
 
-### Record provenance at ingestion
+### Append-only authority
 
-An import should preserve a source category, stable source reference where safe, observation time, parser version, and any uncertainty introduced during normalization. If two sources disagree, the conflict remains explainable.
+In the archive, observations, media, and lifecycle events are append-only rows. Re-inserting a record that conflicts with an existing observation is refused instead of overwriting it. Edits and deletions are new evidence (an observed delete, an edited observation, a source-marked deletion), not updates in place.
 
-Provenance increases storage and schema complexity. The alternative is more expensive: once normalized data loses its origin, a later fix cannot tell which records need reprocessing.
+In the ledger, the authority is a framed journal of finalized, immutable segments. Each segment's manifest chains to the hash of the previous one. Malformed frames fail closed, and only a trailing partial frame, the signature of an interrupted write, may be truncated. A record disappearing from a store needs two observations before the ledger calls it gone; with one, its state is "unknown".
 
-### Prefer append-only evidence for change events
+<!-- QUESTION FOR WOUT: Why did you pick a hash-chained segment journal for the ledger rather than append-only SQLite rows as in the archive? One sentence on the trade-off would help. -->
 
-For observations such as appearance, update, disappearance, or explicit deletion evidence, an append-only journal provides a durable sequence. A current-state table can then be projected from it.
+### Projections are disposable
 
-Append-only does not mean immutable forever. Privacy deletion and retention policies still need deliberate procedures. It means ordinary processing does not overwrite the evidence needed to explain how the current state was derived.
+Search indexes and current-state tables are projections. In the ledger, the SQLite index states that the journal, not the index, is authoritative. It records its projection, journal, and sanitization versions, and a count receipt detects missing rows. Resetting the projection rebuilds it from the journal. In the archive, FTS5 tables serve search, a check flags authoritative rows newer than the derived projections, and a recovery command marks interrupted jobs incomplete, rebuilds derived indexes, and quarantines stale generated output. Both tools run SQLite integrity checks.
 
-### Separate authority from projection
+### Provenance and uncertainty in the data model
 
-The system identifies one authoritative record layer. Search indexes, desktop views, summary tables, and export caches are projections with a version and a rebuild path. A projection may be deleted and regenerated without losing authority.
+Every imported record carries where it came from: the scan, the store, the source record, the adapter, the observation time, and (in the archive) the parser version. Uncertainty is part of the schema, not a nullable column. The archive distinguishes exact from inferred authorship, lists inferred fields, and labels comparisons as conflicting, unresolved, or inconclusive, with a confidence level. Normalization reports complete, truncated, or malformed results. The ledger distinguishes omitted, null, empty, and present fields, and labels correlation results so that they never read as proof of identity.
 
-This boundary makes corruption recovery tractable. If an index fails an integrity check, the response is to quarantine or rebuild it from canonical records, not to accept its current contents as a competing truth.
+### Bounded imports
 
-### Make uncertainty part of the data model
+Format detection reads only a bounded prefix of a candidate file, never the whole file. Imports have separate limits on source size, record count, and line length, and the archive commits in fixed-size batches so an interrupted import stops at a safe boundary. The ledger caps frame and manifest sizes.
 
-A reconstructed relationship can be exact, inferred, conflicting, or unknown. Those states should not collapse into a nullable field whose meaning changes by call site.
+### Deterministic migrations
 
-Explicit uncertainty improves both user experience and tests. The interface can explain why a result is partial, while fixtures can exercise each evidence state without using real personal data.
+Schema migrations must form a contiguous sequence, run inside one immediate transaction, and record the applied version. A database from a newer version of the tool is refused rather than partially rewritten. The ledger's projection upgrade runs in one transaction, so a failure leaves the previous version exactly as it was, and it never rewrites the journal.
 
-### Bound input before parsing deeply
+### Exports state their limits
 
-Large-file support needs two limits: a small bounded prefix for format detection and a separately configured maximum for normal import. Detection should not read an entire candidate merely to decide what parser to use.
+Archive exports carry a versioned manifest that declares exclusions, pseudonymization, exclusion counts, and every known limitation. An export never claims to be a complete history beyond its declared inputs.
 
-Streaming or chunked processing reduces memory pressure, but it complicates transactions and error reporting. An importer should record progress only at safe commit boundaries and report a failed source item without copying sensitive content into logs.
+<!-- QUESTION FOR WOUT: The ledger's richer export manifest is documented as future work. Should this section mention it, or keep it to the archive? -->
 
-### Keep migrations deterministic and recoverable
+### Privacy by default
 
-Each schema version has a single ordered upgrade path. Migrations run transactionally where supported, record their applied version, and do not depend on network state. Before destructive transformation, a local backup or export boundary is explicit.
+Normalization redacts credential-like fields. Diagnostics cap their size and leave out message content, identifiers, paths, and tracebacks. Tests use synthetic fixtures only, and a privacy check in each gate rejects real-looking data in the repository. The ledger's gate also scans the working tree and history for secrets.
 
-Forward compatibility is not assumed. A future unsupported schema should fail with a clear instruction rather than being opened and partially rewritten.
+## Validation
 
-## Failure modes and safeguards
+Each tool has one local gate. The archive's gate runs ruff, the privacy check, mypy, and pytest in isolated caches. The ledger's gate runs formatting, ESLint, type checks, Vitest suites (unit, fixtures, integration, compatibility, privacy), the privacy and secret scans, and license checks; its Rust installer parts use cargo tests and clippy.
 
-| Failure mode | Safeguard |
-|---|---|
-| Format detection loads a huge file | Read only a bounded prefix, then enforce the import limit |
-| Duplicate sources create duplicate records | Stable source identity plus deterministic normalization and deduplication |
-| A derived index becomes inconsistent | Versioned projection, integrity check, quarantine, and rebuild |
-| Missing evidence is presented as fact | Explicit exact, inferred, conflicting, and unknown states |
-| A parser fix changes old results invisibly | Parser version and deterministic reprocessing plan |
-| Logs reproduce local content | Structural error categories, bounded excerpts only in controlled diagnostics, redaction by default |
-| A migration stops halfway | Transactional migration or checkpointed recovery with version verification |
-| An export claims completeness it cannot prove | Export manifest states included sources, exclusions, and limitations |
-| Packaging is mistaken for platform validation | Report native, compatibility-layer, and untested platform evidence separately |
+I keep packaging evidence separate from application behaviour. Linux packaging of the archive is verified locally; a Windows package run under Wine is labelled as Wine, not as native Windows validation.
 
-## Testing and verification
+<!-- QUESTION FOR WOUT: Has either tool had native Windows or macOS validation since? If so, say which; if not, this sentence stays as written. -->
 
-Real local content is unnecessary for most verification. A representative test plan can use synthetic fixtures to cover structure and failure modes:
+## What I learned
 
-- minimal valid inputs for each supported version;
-- duplicates and conflicting observations;
-- truncated, malformed, and oversized inputs;
-- boundary-sized files around detection and import limits;
-- interrupted journal writes and migration failures;
-- deterministic reconstruction from the same canonical input;
-- index deletion followed by a byte-stable or semantically equivalent rebuild;
-- export manifests with explicit source and exclusion fields;
-- privacy scans that reject workstation paths, identities, and real-looking content in fixtures;
-- SQLite integrity and foreign-key checks where SQLite is the storage engine.
-
-Packaging validation is kept distinct from application semantics. A source package proves that the intended source and lock state were included. A Linux package can receive native smoke coverage. A package run through a compatibility layer is labelled as such rather than being called native platform validation.
-
-## Outcome and lessons
-
-A system built with these boundaries makes its conclusions easier to challenge: a user or maintainer can ask where a record came from, which parser interpreted it, which projection displayed it, and what information was unavailable. Recovery has a defined source of truth instead of relying on whichever database file still opens.
-
-The strongest lesson is to model evidence quality before building a polished browser. Provenance and uncertainty added later are usually incomplete because the original import already discarded context.
-
-Another lesson is that privacy and testability reinforce each other. Synthetic fixtures make the suite portable and shareable, while explicit source boundaries keep both tests and runtime from wandering into unrelated local data.
-
-## Evidence basis and limitations
-
-The diagrams, mechanisms, and failure scenarios on this page are generalized design guidance, not a verified feature list for a named or linked project. They use synthetic examples and do not expose records, identities, messages, source paths, screenshots, or investigative output. The documented personal-project scope is limited to the Python/TypeScript local tools, SQLite, recoverable projections, automated testing, and static analysis described above; readers cannot authenticate the private source summary from this page.
-
-Completeness remains source-dependent. Local-first design can preserve and explain available evidence; it cannot manufacture records that were never retained. The case study makes no claim that an export is a complete history beyond its declared inputs.
+Model evidence quality before building the browser. Provenance and uncertainty added later are always incomplete, because the first import already discarded the context. Privacy and testability also reinforce each other: synthetic fixtures make the suites shareable, and strict source boundaries keep both tests and runtime away from unrelated local data.

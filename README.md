@@ -1,36 +1,24 @@
 # Engineering Portfolio
 
-Anonymized case studies of professional backend responsibilities, related engineering experience, owner-reported AI-assisted engineering workflow design, and clearly labelled general design guidance.
+I am a backend-focused full-stack engineer working mainly with PHP/Symfony and API Platform, Java/Kotlin/Spring, PostgreSQL, and TypeScript. This portfolio collects case studies of my professional backend work and of systems I designed and built on my own.
 
-## Professional backend case study
+## Case studies
 
-The lead case study describes my documented PHP/Symfony and API Platform work in a configurable claims platform: insurer-specific business rules, Doctrine and PostgreSQL reporting, regression tests, access control, and delivery verification. It distinguishes my supported responsibilities from team and system context, and from general design guidance.
-
-## Other case studies
-
-| Case study | Evidence and scope |
+| Case study | What it covers |
 |---|---|
-| [Evolving Domain Rules in a Professional Backend](case-studies/evolving-domain-rules.md) | My PHP/Symfony and API Platform work in a configurable claims platform, described without employer identifiers or private source details. |
-| [A Modular TypeScript Platform](case-studies/modular-typescript-platform.md) | Documented TypeScript monorepo work, with system descriptions distinguished from generalized architecture guidance. |
-| [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) | Local-data engineering scope, with implementation details and illustrative design guidance identified separately. |
-| [Resilient Radio Discovery](case-studies/resilient-radio-discovery.md) | Public-source analysis of ordered metadata fallback, provenance, and failure handling; it makes no personal-authorship or deployment claim. |
-| [AI-Assisted Engineering: Scope and Evidence](case-studies/verified-ai-assisted-engineering.md) | Owner-reported workflow-design contribution and recommended process, distinguishing agent work, automated checks, agent review, and documented human inspection. |
+| [Evolving Domain Rules in a Professional Backend](case-studies/evolving-domain-rules.md) | PHP/Symfony and API Platform services for a multi-insurer claims platform: configurable rules, PostgreSQL reporting, testing, access control, and delivery. |
+| [A Modular TypeScript Platform](case-studies/modular-typescript-platform.md) | How I keep one domain spine, thin entry points, fail-closed operational gates, and rebuildable projections in my main personal TypeScript platform. |
+| [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) | My local-first tools built on an append-only journal, rebuildable SQLite projections, provenance, and bounded imports. |
+| [Resilient Radio Discovery](case-studies/resilient-radio-discovery.md) | Ordered metadata fallback and failure isolation in my public Python/SQLite radio logger. |
+| [AI-Assisted Delivery](case-studies/ai-assisted-delivery.md) | The repository workflows, review loop, and guard tooling I built for delivering software with coding agents. |
 
 ## Supporting engineering notes
 
-- [Failure-Closed Java Host Integration](notes/failure-closed-java-host-integration.md) discusses personal Java/Swing interface and test contributions, with the detailed lifecycle material labelled as general guidance. Its source is not public. This is separate from professional Java/Kotlin/Spring assignments and the [public G-Earth Trade Assistant](https://github.com/wouthh/g-earth-trade-assistant).
-- [Trading-System and Automation Evolution](notes/trading-system-evolution.md) discusses historical public repositories without inferring personal authorship from account or commit metadata.
+- [Failure-Closed Java Host Integration](notes/failure-closed-java-host-integration.md): lifecycle and readiness design for a personal Java/Swing extension running inside a third-party desktop host.
+- [Trading-System and Automation Evolution](notes/trading-system-evolution.md): lessons from a historical Electron client and Node.js service.
 
-## How to read the evidence
+See the [capabilities map](capabilities.md) for how technologies map to these pages.
 
-Each page identifies whether a statement is supported by documented professional experience, inspectable public project material, owner-reported contribution, or generalized guidance. See the [capabilities map](capabilities.md) for the relationship between supported scope and the case studies. Source code can support a claim about what a project contains; by itself, it does not establish who personally designed, reviewed, or tested it. Automated tests and agent review are not described as human inspection. Tests documented by a repository are not represented as having run during this update.
+## About this portfolio
 
-Private-source summaries, whether professional or personal, remain limited to approved, non-identifying scope. An independent reader may not be able to authenticate them from this portfolio. The public portfolio contains no employer or client names, private repository URLs, operational data, or proprietary implementation material.
-
-## Experimental example
-
-[Equipment Service Desk](https://github.com/wouthh/equipment-service-desk) is an AI-generated synthetic PHP/Symfony demonstration. A coding agent generated it without my supervision during its original development. It is not a client project and has no production deployment or real users. It is presented only as an experiment, not as evidence of my personally supervised implementation or professional experience.
-
-## Status
-
-This portfolio is maintained documentation. Each page states its evidence limits and current status; updating a description does not establish new testing, deployment, or human review.
+Professional work is anonymized: no employer, client, or chronology is named. No private source code is included. Public projects link to their source.
