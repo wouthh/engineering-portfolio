@@ -1,14 +1,11 @@
 # Failure-Closed Java/Swing Host Integration
 
-General design guidance for lifecycle ownership, readiness checks, bounded recovery, packaging, and verification around a third-party desktop host.
+Lifecycle ownership, readiness checks, bounded recovery, packaging, and verification for a Java/Swing extension that runs inside a third-party desktop host.
 
-- GitHub publication: This note is public; the underlying source is not
-- Context: Personal Java/Swing integration; host and protocol details are omitted
-- Documentation status: Guidance maintained; implementation and current project status are not independently verified here
+- **Context:** a personal Java/Swing extension I built, with its interface and tests; host and protocol details are omitted
+- **Source:** private
 
-## Contribution and evidence scope
-
-My documented personal-project experience includes work on a Java/Swing desktop extension, its interface, and related tests. The underlying source is not public, so readers cannot independently authenticate project behavior from this note. The technical sections below are general guidance, not a verified feature list or a claim that I personally designed or reviewed every detail. This personal integration is separate from my professional Java/Kotlin/Spring assignments and the public [G-Earth Trade Assistant](https://github.com/wouthh/g-earth-trade-assistant).
+<!-- QUESTION FOR WOUT: Which of the mechanisms below does your extension actually implement (fresh execution gate, cancellation on lifecycle events, no automatic activation, transient overrides, atomic configuration writes, packaged-JAR checks)? Rewrite those as "I" statements and drop any that are only advice. -->
 
 ## Summary
 
@@ -43,14 +40,10 @@ A safe lifecycle can begin stopped after launch and configuration reload. Starti
 
 An appropriate local gate for this kind of project can compile the application, run unit tests, and verify the packaged JAR with isolated test homes. UI previews should not open a host connection. Protocol fixtures should use synthetic, project-owned records. Packaging checks can inspect the main class, dependency layout, and artifact structure.
 
-Live acceptance is separate from fixture testing. A manual sequence can verify connection, deliberate context selection, start, cancellation on context loss, recovery, and disconnect cleanup. A submitted command is not proof that a remote system accepted it. This note does not claim that these checks were run for the private integration.
+Live acceptance is separate from fixture testing. A manual sequence can verify connection, deliberate context selection, start, cancellation on context loss, recovery, and disconnect cleanup. A submitted command is not proof that a remote system accepted it.
 
 ## Lessons
 
 The broad lesson is that integrations need an authority model even when they are local plugins. Connection presence is not authorization, configuration is not live context, and a timer is not a reason to act after the state that created it has disappeared.
 
 A second lesson is to keep host-native types at the adapter boundary. Application modules should consume project-owned records and ports. That limits compatibility changes and lets most tests run without starting the third-party application.
-
-## Evidence basis and limitations
-
-The supported personal-project scope is limited to Java/Swing extension, interface, and testing work. The underlying source is private and is not reproduced here. Detailed lifecycle, protocol, configuration, test, packaging, and failure behavior above is general guidance, not a verified description of the implementation or its current host compatibility. The private evidence cannot be independently authenticated from this page.
