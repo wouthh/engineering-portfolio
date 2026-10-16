@@ -40,8 +40,6 @@ Writes go through domain procedures in the core service. The website never dupli
 
 The web repository has a boundary check in its gate that rejects any import of the core service's implementation folders. Inside one repository I document allowed and forbidden imports in a header on each file.
 
-<!-- QUESTION FOR WOUT: Inside the core repository, import direction is documented per file but not enforced by a lint rule. Is that a deliberate choice (for example, the header is aimed at agents and reviewers), or should the page say it is planned? -->
-
 ### Thin entry points
 
 A command handler parses input, defers or responds, calls a service, and renders user-facing text. Domain rules live in tested services. One verification command, for example, is a short adapter that hands off to a shared core module. API routes resolve and authorize the viewer, apply rate limits, validate input against strict Zod schemas, and return a standard response envelope.
@@ -56,8 +54,6 @@ One operations switch controls every class of active side effect. Missing, blank
 
 The guards sit at two layers. Registration-time guards keep paused schedulers from starting. Execution-time guards, checked again just before each side effect, cover queued work, direct service calls, admin commands, and CLI paths. The web service applies the same switch and falls back to archive views while operations are closed. The management service also has a shadow profile that suppresses every mutation and returns a typed "suppressed" result.
 
-<!-- QUESTION FOR WOUT: What made you add the epoch requirement on top of the switch? A short reason (for example, preventing stale queued work from firing after a re-enable) would make this section stronger. -->
-
 ### Claims before side effects
 
 A one-time side effect follows a fixed order: claim atomically in the database, commit, act, then record the result. A daily delivery has one claim per date, and only the current claimant may send. When a delivery's outcome is uncertain, it is stored as unknown and never replayed automatically. Each publisher keeps its own claim and deduplication, and role routines skip the write when the actual state already matches the desired state.
@@ -65,8 +61,6 @@ A one-time side effect follows a fixed order: claim atomically in the database, 
 ### Projections never win over facts
 
 Each service's ownership is written down: game and reward facts belong to the core service, generic authority to the management service, presentation and its storage to the web service. Derived state, such as notification roles, is computed from the owning records. An unknown fact never removes an existing role, and a pending fact never counts as linked.
-
-<!-- QUESTION FOR WOUT: Can the web service's read models be rebuilt from the core and management facts (for example, by replaying sync lanes)? I could not confirm a documented rebuild path. If yes, add one sentence on how; if no, the section should stay as is. -->
 
 ## Validation
 

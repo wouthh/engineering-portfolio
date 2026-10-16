@@ -31,8 +31,6 @@ In the archive, observations, media, and lifecycle events are append-only rows. 
 
 In the ledger, the authority is a framed journal of finalized, immutable segments. Each segment's manifest chains to the hash of the previous one. Malformed frames fail closed, and only a trailing partial frame, the signature of an interrupted write, may be truncated. A record disappearing from a store needs two observations before the ledger calls it gone; with one, its state is "unknown".
 
-<!-- QUESTION FOR WOUT: Why did you pick a hash-chained segment journal for the ledger rather than append-only SQLite rows as in the archive? One sentence on the trade-off would help. -->
-
 ### Projections are disposable
 
 Search indexes and current-state tables are projections. In the ledger, the SQLite index states that the journal, not the index, is authoritative. It records its projection, journal, and sanitization versions, and a count receipt detects missing rows. Resetting the projection rebuilds it from the journal. In the archive, FTS5 tables serve search, a check flags authoritative rows newer than the derived projections, and a recovery command marks interrupted jobs incomplete, rebuilds derived indexes, and quarantines stale generated output. Both tools run SQLite integrity checks.
@@ -53,8 +51,6 @@ Schema migrations must form a contiguous sequence, run inside one immediate tran
 
 Archive exports carry a versioned manifest that declares exclusions, pseudonymization, exclusion counts, and every known limitation. An export never claims to be a complete history beyond its declared inputs.
 
-<!-- QUESTION FOR WOUT: The ledger's richer export manifest is documented as future work. Should this section mention it, or keep it to the archive? -->
-
 ### Privacy by default
 
 Normalization redacts credential-like fields. Diagnostics cap their size and leave out message content, identifiers, paths, and tracebacks. Tests use synthetic fixtures only, and a privacy check in each gate rejects real-looking data in the repository. The ledger's gate also scans the working tree and history for secrets.
@@ -64,8 +60,6 @@ Normalization redacts credential-like fields. Diagnostics cap their size and lea
 Each tool has one local gate. The archive's gate runs ruff, the privacy check, mypy, and pytest in isolated caches. The ledger's gate runs formatting, ESLint, type checks, Vitest suites (unit, fixtures, integration, compatibility, privacy), the privacy and secret scans, and license checks; its Rust installer parts use cargo tests and clippy.
 
 I keep packaging evidence separate from application behaviour. Linux packaging of the archive is verified locally; a Windows package run under Wine is labelled as Wine, not as native Windows validation.
-
-<!-- QUESTION FOR WOUT: Has either tool had native Windows or macOS validation since? If so, say which; if not, this sentence stays as written. -->
 
 ## What I learned
 
