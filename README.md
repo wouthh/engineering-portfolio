@@ -14,7 +14,7 @@ I am a backend-focused full-stack engineer working mainly with PHP/Symfony and A
 
 ## Supporting engineering notes
 
-- [Failure-Closed Java Host Integration](notes/failure-closed-java-host-integration.md): lifecycle and readiness design for a personal Java/Swing extension running inside a third-party desktop host.
+- [Failure-Closed Java Host Integration](notes/failure-closed-java-host-integration.md): design guidance on lifecycle and readiness for Java/Swing extensions inside a third-party desktop host, drawn from building one.
 - [Trading-System and Automation Evolution](notes/trading-system-evolution.md): lessons from a historical Electron client and Node.js service.
 
 See the [capabilities map](capabilities.md) for how technologies map to these pages.

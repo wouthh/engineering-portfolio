@@ -1,11 +1,9 @@
 # Failure-Closed Java/Swing Host Integration
 
-Lifecycle ownership, readiness checks, bounded recovery, packaging, and verification for a Java/Swing extension that runs inside a third-party desktop host.
+Design guidance on lifecycle ownership, readiness checks, bounded recovery, packaging, and verification for Java/Swing extensions that run inside a third-party desktop host.
 
-- **Context:** a personal Java/Swing extension I built, with its interface and tests; host and protocol details are omitted
+- **Context:** I built a personal Java/Swing extension of this kind, including its interface and tests. The sections below are the design approach I recommend for such integrations, not a feature list of that extension. Host and protocol details are omitted.
 - **Source:** private
-
-<!-- QUESTION FOR WOUT: Which of the mechanisms below does your extension actually implement (fresh execution gate, cancellation on lifecycle events, no automatic activation, transient overrides, atomic configuration writes, packaged-JAR checks)? Rewrite those as "I" statements and drop any that are only advice. -->
 
 ## Summary
 
