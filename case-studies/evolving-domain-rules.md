@@ -24,9 +24,9 @@ I then converted the stored explanations that still held display text, with a da
 
 ## Tracing a wrong deductible
 
-In one settlement mode a claim should carry no deductible, yet the back office showed a standard deductible and reduced the compensation. I traced the value through the parameter computation, the creation of the damage group, the persisted deductible, and its API and back-office representation. I fixed the computation and the damage-group creation, and added regression tests that run that mode against a standard settlement.
+In one settlement mode a claim should carry no deductible, yet the back office showed a standard deductible and reduced the compensation. I traced the value through the parameter computation, the creation of the damage group, the persisted deductible, and its API and back-office representation. I fixed the computation and added regression tests that run that mode against a standard settlement.
 
-The first fix passed unit tests, static analysis, and CI, but QA still reproduced the discrepancy: my fix had not reached a later step in the path. The lesson I took from it is to test the persisted, rehydrated state through the API, not only the computation.
+The first fix passed unit tests, static analysis, and CI, but QA still reproduced the discrepancy: my fix had not reached a later step in the path. The rule only read the settlement mode chosen on the claim, while the back office could carry that mode on the settlement itself, and the damage group's totals applied their own deductible. I fixed both, so every step follows the same rule and keeps a manually forced deductible, and added regression tests for each. The lesson I took from it is to test the persisted, rehydrated state through the API, not only the computation.
 
 ## Access control
 
