@@ -38,7 +38,7 @@ Diagram summary: bot commands call domain procedures in the core service, which 
 
 Writes go through domain procedures in the core service. The website never duplicates game logic; it receives facts. Cross-cutting policy lives in small shared packages for configuration, event wording, and wire contracts. Every surface that announces an event derives its text from one canonical module, so a rule change happens in one place.
 
-The web repository has a boundary check in its gate that rejects any import of the core service's implementation folders. Inside one repository I document allowed and forbidden imports in a header on each file.
+The web repository has a boundary check in its gate that rejects any import of the core service's implementation folders. Inside the core repository, source files where ownership or a boundary matters carry a context header written for agents and reviewers: purpose, dependencies, invariants, inputs and outputs, related components, and forbidden imports. Import layering there is not enforced by a lint rule; reviewers check changes against those headers.
 
 ### Thin entry points
 
@@ -50,7 +50,7 @@ Wire schemas live in a contracts package: the response envelope, a fixed set of 
 
 ### Fail-closed operational gates
 
-One operations switch controls every class of active side effect. Missing, blank, false, or unrecognized values all mean disabled. An explicit "on" is not enough either: the service also needs a durable operations epoch, and work left over from a closed period has to be rebased or cleaned up before it can run.
+One operations switch controls every class of active side effect. Missing, blank, false, or unrecognized values all mean disabled. An explicit "on" is not enough either. The switch expresses intent, while a durable operations epoch records whether operations are closed, reopening, or enabled, with timestamps and a readiness flag. Reopening suppresses, expires, or rebaselines the work that accumulated while operations were closed, so none of it fires unexpectedly, and nothing is marked as sent or delivered just to silence it. Individual feature areas have their own epochs and reopen the same way. Missing or malformed epoch data counts as closed, and a restart never replays a completed transition.
 
 The guards sit at two layers. Registration-time guards keep paused schedulers from starting. Execution-time guards, checked again just before each side effect, cover queued work, direct service calls, admin commands, and CLI paths. The web service applies the same switch and falls back to archive views while operations are closed. The management service also has a shadow profile that suppresses every mutation and returns a typed "suppressed" result.
 
@@ -60,7 +60,7 @@ A one-time side effect follows a fixed order: claim atomically in the database, 
 
 ### Projections never win over facts
 
-Each service's ownership is written down: game and reward facts belong to the core service, generic authority to the management service, presentation and its storage to the web service. Derived state, such as notification roles, is computed from the owning records. An unknown fact never removes an existing role, and a pending fact never counts as linked.
+Each service's ownership is written down: game and reward facts belong to the core service, generic authority to the management service, presentation and its storage to the web service. Derived state, such as notification roles, is computed from the owning records. The web service builds its game and membership views from versioned, authenticated owner facts combined with its own state, and it is never an authority for gameplay or membership. Profiles and sessions are web-owned state, and the web service is authoritative for them. An unknown fact never removes an existing role, and a pending fact never counts as linked.
 
 ## Validation
 
