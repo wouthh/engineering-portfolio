@@ -6,7 +6,7 @@ Professional batch work on Java, Kotlin, and Spring Batch, with a React and Elec
 
 ## Context
 
-The team handed me the processing work that had to be automated, and I built the batch jobs that carried it out. Each job had to give the same result on test data and on real data, and it had to recover cleanly when a run stopped partway through.
+The team handed me the processing work that had to be automated, and I built the batch jobs that carried it out. Each job had to apply the same processing rules to test data and to real data and produce correct output for each, and it had to recover cleanly when a run stopped partway through.
 
 ## What I did
 
