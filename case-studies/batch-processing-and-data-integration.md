@@ -1,8 +1,8 @@
 # Batch Processing and Data Integration
 
-Batch processing of insurance contracts and claims on Java, Kotlin, and Spring Batch, a React workstation running inside Electron that automated a claims web application, and earlier file-based integration work in PHP.
+Batch processing of insurance contracts and claims on Java, Kotlin, and Spring Batch, a React workstation running inside Electron that automated a claims web application, and file-based integration work in PHP.
 
-- **Stack:** Java, Kotlin, Spring Batch, React, Electron. Earlier work: PHP, CSV/XML/JSON, file transfer.
+- **Stack:** Java, Kotlin, Spring Batch, React, Electron, PHP, CSV/XML/JSON, file transfer.
 
 ## Context
 
@@ -37,9 +37,9 @@ Claim handlers used an insurer-specific claims web application that needed many 
 
 I argued for Electron because it embeds a browser engine and lets scripts run inside the pages it opens. The web application had no other way to be driven.
 
-## Earlier: file-based imports and exports
+## File-based imports and exports
 
-On an earlier assignment I wrote file-based imports and exports of various data for click-and-collect shops in PHP. The work covered CSV, XML, and JSON processing and the file-transfer workflows that moved those files between systems.
+On another assignment I wrote file-based imports and exports of various data for click-and-collect shops in PHP. The work covered CSV, XML, and JSON processing and the file-transfer workflows that moved those files between systems.
 
 ## How it was verified
 
