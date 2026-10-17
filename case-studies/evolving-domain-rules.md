@@ -48,3 +48,9 @@ Before a hotfix release, I ran the full pending sequence of 14 migrations agains
 - I adapted the API authenticator to accept Keycloak-issued OpenID Connect tokens alongside the existing service-integration path, within the platform's JWT authentication and role-based access control.
 - I maintained Docker, CircleCI, Helm, and OpenShift delivery configuration, and verified migrations during release preparation and after deployment. I added a deployment readiness gate, so a deployment reports success only once the backend is ready, with a regression test for the deploy script.
 - I contributed to Vue.js/Nuxt.js interfaces.
+
+## How I work on this platform
+
+- I keep each commit small and focused on one concern, and prefix its subject with the ticket it belongs to.
+- I add a short context header to source files, stating their purpose, dependencies, invariants, and related files, so reviewers and agents can find their way quickly.
+- I work across the backend, the rule sources, and the frontend, and I maintain the delivery configuration that ships them.
