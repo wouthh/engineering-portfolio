@@ -51,6 +51,5 @@ Before a hotfix release, I ran the full pending sequence of 14 migrations agains
 
 ## How I work on this platform
 
-- I keep each commit small and focused on one concern, and prefix its subject with the ticket it belongs to.
+- I keep each commit small and focused on one concern.
 - I add a short context header to source files, stating their purpose, dependencies, invariants, and related files, so reviewers and agents can find their way quickly.
-- I work across the backend, the rule sources, and the frontend, and I maintain the delivery configuration that ships them.
