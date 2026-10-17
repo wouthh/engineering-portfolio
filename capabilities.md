@@ -12,7 +12,7 @@ This map connects the technologies and practices I work with to the page that de
 | Personal local-data tools | Python, TypeScript, SQLite, recoverable projections, automated testing, static analysis | [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) |
 | Failure handling in a public project | Python, SQLite, ordered source fallback, provenance | [Resilient Radio Discovery](case-studies/resilient-radio-discovery.md) |
 | Local-data design decisions | Append-only journal, provenance, bounded imports, migrations, rebuildable indexes | [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) |
-| Personal Java/Swing integration | Java, Swing, third-party desktop host | [Failure-Closed Java Host Integration](notes/failure-closed-java-host-integration.md) |
-| Professional JVM work | Java, Kotlin, Spring | Professional assignments, separate from the personal integration note |
+| Java/Swing desktop integration | Java 21, Swing, Maven, G-Earth host API | [Failure-Closed Java Host Integration](case-studies/failure-closed-java-host-integration.md) |
+| Professional JVM work | Java, Kotlin, Spring | Professional assignments, separate from the personal Java/Swing case study |
 | AI-assisted engineering workflows | Repository-specific agent workflows, review loop, change-scope and identity guards | [AI-Assisted Delivery](case-studies/ai-assisted-delivery.md) |
 | Broader experience | ETL, SQL Server, MySQL/MariaDB, Kubernetes, Railway, Cloudflare | Not covered by a case study |

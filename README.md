@@ -11,10 +11,10 @@ I am a backend-focused full-stack engineer working mainly with PHP/Symfony and A
 | [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) | My local-first tools built on an append-only journal, rebuildable SQLite projections, provenance, and bounded imports. |
 | [Resilient Radio Discovery](case-studies/resilient-radio-discovery.md) | Ordered metadata fallback and failure isolation in my public Python/SQLite radio logger. |
 | [AI-Assisted Delivery](case-studies/ai-assisted-delivery.md) | The repository workflows, review loop, and guard tooling I built for delivering software with coding agents. |
+| [Failure-Closed Java Host Integration](case-studies/failure-closed-java-host-integration.md) | Generation-bound scheduling, cancellation, atomic settings, and byte-aware message pacing in my public Java/Swing G-Earth extension. |
 
-## Supporting engineering notes
+## Supporting engineering note
 
-- [Failure-Closed Java Host Integration](notes/failure-closed-java-host-integration.md): design guidance on lifecycle and readiness for Java/Swing extensions inside a third-party desktop host, drawn from building one.
 - [Trading-System and Automation Evolution](notes/trading-system-evolution.md): lessons from a historical Electron client and Node.js service.
 
 See the [capabilities map](capabilities.md) for how technologies map to these pages.
