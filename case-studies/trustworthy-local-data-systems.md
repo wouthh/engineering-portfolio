@@ -2,7 +2,7 @@
 
 Design decisions in two personal local-first tools I built: a Python archive with search and export, and a TypeScript event-history ledger. Both read a desktop application's local caches and stores, keep their data on the user's machine, and use SQLite.
 
-- **Stack:** Python, PySide6, TypeScript, SQLite (FTS5 and `node:sqlite`), pytest, Vitest, mypy, ruff, ESLint
+- **Stack:** Python, PySide6, TypeScript, Rust (installer), SQLite (FTS5 and `node:sqlite`), pytest, Vitest, mypy, ruff, ESLint
 - **Source:** private personal projects
 
 ## The problem
@@ -29,7 +29,7 @@ Diagram summary: local sources pass through bounded import adapters and normaliz
 
 In the archive, observations, media, and lifecycle events are append-only rows. Re-inserting a record that conflicts with an existing observation is refused instead of overwriting it. Edits and deletions are new evidence (an observed delete, an edited observation, a source-marked deletion), not updates in place.
 
-In the ledger, the authority is a framed journal of finalized, immutable segments. Each segment's manifest chains to the hash of the previous one. Malformed frames fail closed, and only a trailing partial frame, the signature of an interrupted write, may be truncated. A record disappearing from a store needs two observations before the ledger calls it gone; with one, its state is "unknown".
+In the ledger, the authority is a framed journal of finalized, immutable segments. I made the journal an integrity boundary independent of the query database: schema-versioned frames, monotonic sequence numbers, and previous-segment hashes make order and integrity checkable without SQLite, and the chain is tamper-evident. Segmenting bounds crash recovery and tail validation and lets the index catch up incrementally. A broken SQLite projection never means lost history. Malformed frames fail closed, and only a trailing partial frame, the signature of an interrupted write, may be truncated. A record disappearing from a store needs two observations before the ledger calls it gone; with one, its state is "unknown".
 
 ### Projections are disposable
 
