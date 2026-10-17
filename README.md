@@ -7,7 +7,7 @@ I am a backend-focused full-stack engineer working mainly with PHP/Symfony and A
 | Case study | What it covers |
 |---|---|
 | [Evolving Domain Rules in a Professional Backend](case-studies/evolving-domain-rules.md) | PHP/Symfony and API Platform services for a multi-insurer claims platform: configurable rules, decisions stored as codes, a traced deductible defect, OIDC API authentication, and a migration rehearsal on a production copy. |
-| [Batch Processing and Data Integration](case-studies/batch-processing-and-data-integration.md) | Spring Batch jobs for insurance contracts and claims, a React and Electron workstation that automated a claims web application, and earlier PHP file imports and exports. |
+| [Batch Processing and Data Integration](case-studies/batch-processing-and-data-integration.md) | Spring Batch jobs for insurance contracts and claims, a React and Electron workstation that automated a claims web application, and PHP file imports and exports. |
 | [A Modular TypeScript Platform](case-studies/modular-typescript-platform.md) | How I keep one domain spine, thin entry points, fail-closed operational gates, and projections derived from owner facts in my main personal TypeScript platform. |
 | [Trustworthy Local Data Systems](case-studies/trustworthy-local-data-systems.md) | My local-first tools built on an append-only journal, rebuildable SQLite projections, provenance, and bounded imports. |
 | [Resilient Radio Discovery](case-studies/resilient-radio-discovery.md) | Ordered metadata fallback and failure isolation in my public Python/SQLite radio logger. |
