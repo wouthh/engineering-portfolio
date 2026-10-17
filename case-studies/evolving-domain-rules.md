@@ -18,7 +18,7 @@ Rule sources are authoritative, and generated rule artifacts are never edited by
 
 ## Decisions are codes, wording is presentation
 
-I separated stored decisions from their wording. Rule outcomes travel as stable machine-readable codes through the rules engine, persistence, and the API, and those codes run in production for several insurers. Insurer-specific wording, with insurer overrides and fallbacks, is resolved only at the presentation boundaries: the interface, PDFs, and exports. A wording change can therefore never change a stored decision.
+I separated stored decisions from their wording. Rule outcomes travel as stable machine-readable codes through the rules engine, persistence, and the API, and those codes run in production. Insurer-specific wording, with insurer overrides and fallbacks, is resolved only at the presentation boundaries: the interface, PDFs, and exports. A wording change can therefore never change a stored decision.
 
 I then converted the stored explanations that still held display text, with a data migration that maps each known text exactly to its code and leaves unknown or dynamic historical values unchanged, so nothing is discarded and a second run changes nothing.
 
@@ -26,7 +26,7 @@ I then converted the stored explanations that still held display text, with a da
 
 In one settlement mode a claim should carry no deductible, yet the back office showed a standard deductible and reduced the compensation. I traced the value through the parameter computation, the creation of the damage group, the persisted deductible, and its API and back-office representation. I fixed the computation and the damage-group creation, and added regression tests that run that mode against a standard settlement.
 
-The first fix passed unit tests, static analysis, and CI, but QA still reproduced the discrepancy: the value was recomputed or overwritten later in the path. The lesson I took from it is to test the persisted, rehydrated state through the API, not only the computation.
+The first fix passed unit tests, static analysis, and CI, but QA still reproduced the discrepancy: my fix had not reached a later step in the path. The lesson I took from it is to test the persisted, rehydrated state through the API, not only the computation.
 
 ## Access control
 
